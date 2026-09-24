@@ -1,0 +1,2183 @@
+{
+  "get": "fixtures",
+  "parameters": {
+    "ids": "see-response"
+  },
+  "errors": [],
+  "results": 10,
+  "paging": {
+    "current": 1,
+    "total": 1
+  },
+  "response": [
+    {
+      "fixture": {
+        "id": 1035037,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-11T19:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Turf Moor",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 44,
+          "name": "Burnley",
+          "logo": "https://media.api-sports.io/football/teams/44.png",
+          "winner": false
+        },
+        "away": {
+          "id": 50,
+          "name": "Manchester City",
+          "logo": "https://media.api-sports.io/football/teams/50.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 3
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 2
+        },
+        "fulltime": {
+          "home": 0,
+          "away": 3
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [],
+      "lineups": [],
+      "statistics": [
+        {
+          "team": {
+            "id": 44,
+            "name": "Burnley"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 8
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 9
+            },
+            {
+              "type": "Total Shots",
+              "value": 18
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 13
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 11
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 10
+            },
+            {
+              "type": "Offsides",
+              "value": 4
+            },
+            {
+              "type": "Ball Possession",
+              "value": "37%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 2
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 5
+            },
+            {
+              "type": "Total passes",
+              "value": 479
+            },
+            {
+              "type": "Passes accurate",
+              "value": 344
+            },
+            {
+              "type": "Passes %",
+              "value": "72%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "0.63"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        },
+        {
+          "team": {
+            "id": 50,
+            "name": "Manchester City"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 9
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 5
+            },
+            {
+              "type": "Total Shots",
+              "value": 15
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 10
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 14
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 5
+            },
+            {
+              "type": "Offsides",
+              "value": 1
+            },
+            {
+              "type": "Ball Possession",
+              "value": "63%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 1
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 1
+            },
+            {
+              "type": "Total passes",
+              "value": 647
+            },
+            {
+              "type": "Passes accurate",
+              "value": 535
+            },
+            {
+              "type": "Passes %",
+              "value": "83%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "0.87"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "players": []
+    },
+    {
+      "fixture": {
+        "id": 1035038,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-12T11:30:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Emirates Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 42,
+          "name": "Arsenal",
+          "logo": "https://media.api-sports.io/football/teams/42.png",
+          "winner": true
+        },
+        "away": {
+          "id": 65,
+          "name": "Nottingham Forest",
+          "logo": "https://media.api-sports.io/football/teams/65.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 2,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [],
+      "lineups": [],
+      "statistics": [
+        {
+          "team": {
+            "id": 42,
+            "name": "Arsenal"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 1
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 8
+            },
+            {
+              "type": "Total Shots",
+              "value": 10
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 5
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 8
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 8
+            },
+            {
+              "type": "Offsides",
+              "value": 3
+            },
+            {
+              "type": "Ball Possession",
+              "value": "37%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 4
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 2
+            },
+            {
+              "type": "Total passes",
+              "value": 382
+            },
+            {
+              "type": "Passes accurate",
+              "value": 305
+            },
+            {
+              "type": "Passes %",
+              "value": "80%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "0.51"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        },
+        {
+          "team": {
+            "id": 65,
+            "name": "Nottingham Forest"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 8
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 11
+            },
+            {
+              "type": "Total Shots",
+              "value": 20
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 15
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 7
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 10
+            },
+            {
+              "type": "Offsides",
+              "value": 1
+            },
+            {
+              "type": "Ball Possession",
+              "value": "63%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 4
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 5
+            },
+            {
+              "type": "Total passes",
+              "value": 295
+            },
+            {
+              "type": "Passes accurate",
+              "value": 248
+            },
+            {
+              "type": "Passes %",
+              "value": "84%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "0.59"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "players": []
+    },
+    {
+      "fixture": {
+        "id": 1035039,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-12T14:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Vitality Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 35,
+          "name": "Bournemouth",
+          "logo": "https://media.api-sports.io/football/teams/35.png",
+          "winner": null
+        },
+        "away": {
+          "id": 48,
+          "name": "West Ham",
+          "logo": "https://media.api-sports.io/football/teams/48.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 1,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [],
+      "lineups": [],
+      "statistics": [
+        {
+          "team": {
+            "id": 35,
+            "name": "Bournemouth"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 3
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 4
+            },
+            {
+              "type": "Total Shots",
+              "value": 8
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 3
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 13
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 11
+            },
+            {
+              "type": "Offsides",
+              "value": 1
+            },
+            {
+              "type": "Ball Possession",
+              "value": "37%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 4
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 5
+            },
+            {
+              "type": "Total passes",
+              "value": 478
+            },
+            {
+              "type": "Passes accurate",
+              "value": 352
+            },
+            {
+              "type": "Passes %",
+              "value": "74%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "0.87"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        },
+        {
+          "team": {
+            "id": 48,
+            "name": "West Ham"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 5
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 9
+            },
+            {
+              "type": "Total Shots",
+              "value": 15
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 10
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 7
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 10
+            },
+            {
+              "type": "Offsides",
+              "value": 5
+            },
+            {
+              "type": "Ball Possession",
+              "value": "63%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 0
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 2
+            },
+            {
+              "type": "Total passes",
+              "value": 604
+            },
+            {
+              "type": "Passes accurate",
+              "value": 480
+            },
+            {
+              "type": "Passes %",
+              "value": "79%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "2.76"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "players": []
+    },
+    {
+      "fixture": {
+        "id": 1035040,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-12T14:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "American Express Community Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 51,
+          "name": "Brighton",
+          "logo": "https://media.api-sports.io/football/teams/51.png",
+          "winner": true
+        },
+        "away": {
+          "id": 1359,
+          "name": "Luton",
+          "logo": "https://media.api-sports.io/football/teams/1359.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 4,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 4,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [],
+      "lineups": [],
+      "statistics": [
+        {
+          "team": {
+            "id": 51,
+            "name": "Brighton"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 7
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 14
+            },
+            {
+              "type": "Total Shots",
+              "value": 22
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 17
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 16
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 6
+            },
+            {
+              "type": "Offsides",
+              "value": 2
+            },
+            {
+              "type": "Ball Possession",
+              "value": "35%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 2
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 2
+            },
+            {
+              "type": "Total passes",
+              "value": 574
+            },
+            {
+              "type": "Passes accurate",
+              "value": 495
+            },
+            {
+              "type": "Passes %",
+              "value": "86%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "0.73"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        },
+        {
+          "team": {
+            "id": 1359,
+            "name": "Luton"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 2
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 17
+            },
+            {
+              "type": "Total Shots",
+              "value": 20
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 15
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 11
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 9
+            },
+            {
+              "type": "Offsides",
+              "value": 1
+            },
+            {
+              "type": "Ball Possession",
+              "value": "65%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 1
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 4
+            },
+            {
+              "type": "Total passes",
+              "value": 649
+            },
+            {
+              "type": "Passes accurate",
+              "value": 499
+            },
+            {
+              "type": "Passes %",
+              "value": "77%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "2.05"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "players": []
+    },
+    {
+      "fixture": {
+        "id": 1035041,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-12T14:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Goodison Park",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 45,
+          "name": "Everton",
+          "logo": "https://media.api-sports.io/football/teams/45.png",
+          "winner": false
+        },
+        "away": {
+          "id": 36,
+          "name": "Fulham",
+          "logo": "https://media.api-sports.io/football/teams/36.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 0,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [],
+      "lineups": [],
+      "statistics": [
+        {
+          "team": {
+            "id": 45,
+            "name": "Everton"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 3
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 10
+            },
+            {
+              "type": "Total Shots",
+              "value": 14
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 9
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 10
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 3
+            },
+            {
+              "type": "Offsides",
+              "value": 5
+            },
+            {
+              "type": "Ball Possession",
+              "value": "50%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 1
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 1
+            },
+            {
+              "type": "Total passes",
+              "value": 280
+            },
+            {
+              "type": "Passes accurate",
+              "value": 231
+            },
+            {
+              "type": "Passes %",
+              "value": "82%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "0.98"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        },
+        {
+          "team": {
+            "id": 36,
+            "name": "Fulham"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 2
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 19
+            },
+            {
+              "type": "Total Shots",
+              "value": 22
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 17
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 13
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 7
+            },
+            {
+              "type": "Offsides",
+              "value": 0
+            },
+            {
+              "type": "Ball Possession",
+              "value": "50%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 2
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 6
+            },
+            {
+              "type": "Total passes",
+              "value": 497
+            },
+            {
+              "type": "Passes accurate",
+              "value": 380
+            },
+            {
+              "type": "Passes %",
+              "value": "76%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "2.91"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "players": []
+    },
+    {
+      "fixture": {
+        "id": 1035042,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-12T14:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Bramall Lane",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 62,
+          "name": "Sheffield Utd",
+          "logo": "https://media.api-sports.io/football/teams/62.png",
+          "winner": false
+        },
+        "away": {
+          "id": 52,
+          "name": "Crystal Palace",
+          "logo": "https://media.api-sports.io/football/teams/52.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 0,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [],
+      "lineups": [],
+      "statistics": [
+        {
+          "team": {
+            "id": 62,
+            "name": "Sheffield Utd"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 8
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 12
+            },
+            {
+              "type": "Total Shots",
+              "value": 21
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 16
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 15
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 10
+            },
+            {
+              "type": "Offsides",
+              "value": 3
+            },
+            {
+              "type": "Ball Possession",
+              "value": "56%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 1
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 0
+            },
+            {
+              "type": "Total passes",
+              "value": 318
+            },
+            {
+              "type": "Passes accurate",
+              "value": 249
+            },
+            {
+              "type": "Passes %",
+              "value": "78%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "1.91"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        },
+        {
+          "team": {
+            "id": 52,
+            "name": "Crystal Palace"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 6
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 5
+            },
+            {
+              "type": "Total Shots",
+              "value": 12
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 7
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 9
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 2
+            },
+            {
+              "type": "Offsides",
+              "value": 0
+            },
+            {
+              "type": "Ball Possession",
+              "value": "44%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 2
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 1
+            },
+            {
+              "type": "Total passes",
+              "value": 297
+            },
+            {
+              "type": "Passes accurate",
+              "value": 224
+            },
+            {
+              "type": "Passes %",
+              "value": "75%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "2.21"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "players": []
+    },
+    {
+      "fixture": {
+        "id": 1035043,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-12T16:30:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "St. James' Park",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 34,
+          "name": "Newcastle",
+          "logo": "https://media.api-sports.io/football/teams/34.png",
+          "winner": true
+        },
+        "away": {
+          "id": 66,
+          "name": "Aston Villa",
+          "logo": "https://media.api-sports.io/football/teams/66.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 5,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 1
+        },
+        "fulltime": {
+          "home": 5,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [],
+      "lineups": [],
+      "statistics": [
+        {
+          "team": {
+            "id": 34,
+            "name": "Newcastle"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 3
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 3
+            },
+            {
+              "type": "Total Shots",
+              "value": 7
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 3
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 12
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 6
+            },
+            {
+              "type": "Offsides",
+              "value": 3
+            },
+            {
+              "type": "Ball Possession",
+              "value": "41%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 0
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 5
+            },
+            {
+              "type": "Total passes",
+              "value": 304
+            },
+            {
+              "type": "Passes accurate",
+              "value": 273
+            },
+            {
+              "type": "Passes %",
+              "value": "90%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "2.94"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        },
+        {
+          "team": {
+            "id": 66,
+            "name": "Aston Villa"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 2
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 11
+            },
+            {
+              "type": "Total Shots",
+              "value": 14
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 9
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 11
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 10
+            },
+            {
+              "type": "Offsides",
+              "value": 4
+            },
+            {
+              "type": "Ball Possession",
+              "value": "59%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 0
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 2
+            },
+            {
+              "type": "Total passes",
+              "value": 633
+            },
+            {
+              "type": "Passes accurate",
+              "value": 478
+            },
+            {
+              "type": "Passes %",
+              "value": "76%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "0.90"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "players": []
+    },
+    {
+      "fixture": {
+        "id": 1035044,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-13T13:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Gtech Community Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 55,
+          "name": "Brentford",
+          "logo": "https://media.api-sports.io/football/teams/55.png",
+          "winner": null
+        },
+        "away": {
+          "id": 47,
+          "name": "Tottenham",
+          "logo": "https://media.api-sports.io/football/teams/47.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 2
+        },
+        "fulltime": {
+          "home": 2,
+          "away": 2
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [],
+      "lineups": [],
+      "statistics": [
+        {
+          "team": {
+            "id": 55,
+            "name": "Brentford"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 5
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 11
+            },
+            {
+              "type": "Total Shots",
+              "value": 17
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 12
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 8
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 9
+            },
+            {
+              "type": "Offsides",
+              "value": 0
+            },
+            {
+              "type": "Ball Possession",
+              "value": "62%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 0
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 6
+            },
+            {
+              "type": "Total passes",
+              "value": 358
+            },
+            {
+              "type": "Passes accurate",
+              "value": 267
+            },
+            {
+              "type": "Passes %",
+              "value": "75%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "0.67"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        },
+        {
+          "team": {
+            "id": 47,
+            "name": "Tottenham"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 2
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 10
+            },
+            {
+              "type": "Total Shots",
+              "value": 13
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 8
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 10
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 10
+            },
+            {
+              "type": "Offsides",
+              "value": 1
+            },
+            {
+              "type": "Ball Possession",
+              "value": "38%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 0
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 4
+            },
+            {
+              "type": "Total passes",
+              "value": 560
+            },
+            {
+              "type": "Passes accurate",
+              "value": 458
+            },
+            {
+              "type": "Passes %",
+              "value": "82%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "2.16"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "players": []
+    },
+    {
+      "fixture": {
+        "id": 1035045,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-13T15:30:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Stamford Bridge",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 49,
+          "name": "Chelsea",
+          "logo": "https://media.api-sports.io/football/teams/49.png",
+          "winner": null
+        },
+        "away": {
+          "id": 40,
+          "name": "Liverpool",
+          "logo": "https://media.api-sports.io/football/teams/40.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 1
+        },
+        "fulltime": {
+          "home": 1,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [],
+      "lineups": [],
+      "statistics": [
+        {
+          "team": {
+            "id": 49,
+            "name": "Chelsea"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 7
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 13
+            },
+            {
+              "type": "Total Shots",
+              "value": 21
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 16
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 10
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 8
+            },
+            {
+              "type": "Offsides",
+              "value": 0
+            },
+            {
+              "type": "Ball Possession",
+              "value": "56%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 4
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 1
+            },
+            {
+              "type": "Total passes",
+              "value": 650
+            },
+            {
+              "type": "Passes accurate",
+              "value": 460
+            },
+            {
+              "type": "Passes %",
+              "value": "71%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "1.37"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        },
+        {
+          "team": {
+            "id": 40,
+            "name": "Liverpool"
+          },
+          "statistics": [
+            {
+              "type": "Shots on Goal",
+              "value": 1
+            },
+            {
+              "type": "Shots off Goal",
+              "value": 6
+            },
+            {
+              "type": "Total Shots",
+              "value": 8
+            },
+            {
+              "type": "Blocked Shots",
+              "value": 1
+            },
+            {
+              "type": "Shots insidebox",
+              "value": 3
+            },
+            {
+              "type": "Shots outsidebox",
+              "value": 5
+            },
+            {
+              "type": "Fouls",
+              "value": 13
+            },
+            {
+              "type": "Corner Kicks",
+              "value": 3
+            },
+            {
+              "type": "Offsides",
+              "value": 3
+            },
+            {
+              "type": "Ball Possession",
+              "value": "44%"
+            },
+            {
+              "type": "Yellow Cards",
+              "value": 4
+            },
+            {
+              "type": "Red Cards",
+              "value": null
+            },
+            {
+              "type": "Goalkeeper Saves",
+              "value": 2
+            },
+            {
+              "type": "Total passes",
+              "value": 680
+            },
+            {
+              "type": "Passes accurate",
+              "value": 574
+            },
+            {
+              "type": "Passes %",
+              "value": "84%"
+            },
+            {
+              "type": "expected_goals",
+              "value": "2.14"
+            },
+            {
+              "type": "goals_prevented",
+              "value": null
+            }
+          ]
+        }
+      ],
+      "players": []
+    },
+    {
+      "fixture": {
+        "id": 1035046,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-14T19:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Old Trafford",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 33,
+          "name": "Manchester United",
+          "logo": "https://media.api-sports.io/football/teams/33.png",
+          "winner": true
+        },
+        "away": {
+          "id": 39,
+          "name": "Wolves",
+          "logo": "https://media.api-sports.io/football/teams/39.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 1,
+          "away": 0
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      },
+      "events": [],
+      "lineups": [],
+      "statistics": [],
+      "players": []
+    }
+  ]
+}

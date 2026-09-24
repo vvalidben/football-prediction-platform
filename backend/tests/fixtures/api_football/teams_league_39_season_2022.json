@@ -1,0 +1,275 @@
+{
+  "get": "teams",
+  "parameters": {
+    "league": "39",
+    "season": "2022"
+  },
+  "errors": [],
+  "results": 20,
+  "paging": {
+    "current": 1,
+    "total": 1
+  },
+  "response": [
+    {
+      "team": {
+        "id": 33,
+        "name": "Manchester United",
+        "code": "MUN",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/33.png"
+      },
+      "venue": {
+        "name": "Old Trafford"
+      }
+    },
+    {
+      "team": {
+        "id": 34,
+        "name": "Newcastle",
+        "code": "NEW",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/34.png"
+      },
+      "venue": {
+        "name": "St. James' Park"
+      }
+    },
+    {
+      "team": {
+        "id": 35,
+        "name": "Bournemouth",
+        "code": "BOU",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/35.png"
+      },
+      "venue": {
+        "name": "Vitality Stadium"
+      }
+    },
+    {
+      "team": {
+        "id": 36,
+        "name": "Fulham",
+        "code": "FUL",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/36.png"
+      },
+      "venue": {
+        "name": "Craven Cottage"
+      }
+    },
+    {
+      "team": {
+        "id": 39,
+        "name": "Wolves",
+        "code": "WOL",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/39.png"
+      },
+      "venue": {
+        "name": "Molineux Stadium"
+      }
+    },
+    {
+      "team": {
+        "id": 40,
+        "name": "Liverpool",
+        "code": "LIV",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/40.png"
+      },
+      "venue": {
+        "name": "Anfield"
+      }
+    },
+    {
+      "team": {
+        "id": 41,
+        "name": "Southampton",
+        "code": "SOU",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/41.png"
+      },
+      "venue": {
+        "name": "St. Mary's Stadium"
+      }
+    },
+    {
+      "team": {
+        "id": 42,
+        "name": "Arsenal",
+        "code": "ARS",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/42.png"
+      },
+      "venue": {
+        "name": "Emirates Stadium"
+      }
+    },
+    {
+      "team": {
+        "id": 45,
+        "name": "Everton",
+        "code": "EVE",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/45.png"
+      },
+      "venue": {
+        "name": "Goodison Park"
+      }
+    },
+    {
+      "team": {
+        "id": 46,
+        "name": "Leicester",
+        "code": "LEI",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/46.png"
+      },
+      "venue": {
+        "name": "King Power Stadium"
+      }
+    },
+    {
+      "team": {
+        "id": 47,
+        "name": "Tottenham",
+        "code": "TOT",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/47.png"
+      },
+      "venue": {
+        "name": "Tottenham Hotspur Stadium"
+      }
+    },
+    {
+      "team": {
+        "id": 48,
+        "name": "West Ham",
+        "code": "WES",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/48.png"
+      },
+      "venue": {
+        "name": "London Stadium"
+      }
+    },
+    {
+      "team": {
+        "id": 49,
+        "name": "Chelsea",
+        "code": "CHE",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/49.png"
+      },
+      "venue": {
+        "name": "Stamford Bridge"
+      }
+    },
+    {
+      "team": {
+        "id": 50,
+        "name": "Manchester City",
+        "code": "MAC",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/50.png"
+      },
+      "venue": {
+        "name": "Etihad Stadium"
+      }
+    },
+    {
+      "team": {
+        "id": 51,
+        "name": "Brighton",
+        "code": "BRI",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/51.png"
+      },
+      "venue": {
+        "name": "American Express Community Stadium"
+      }
+    },
+    {
+      "team": {
+        "id": 52,
+        "name": "Crystal Palace",
+        "code": "CRY",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/52.png"
+      },
+      "venue": {
+        "name": "Selhurst Park"
+      }
+    },
+    {
+      "team": {
+        "id": 55,
+        "name": "Brentford",
+        "code": "BRE",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/55.png"
+      },
+      "venue": {
+        "name": "Gtech Community Stadium"
+      }
+    },
+    {
+      "team": {
+        "id": 63,
+        "name": "Leeds",
+        "code": "LEE",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/63.png"
+      },
+      "venue": {
+        "name": "Elland Road"
+      }
+    },
+    {
+      "team": {
+        "id": 65,
+        "name": "Nottingham Forest",
+        "code": "NOT",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/65.png"
+      },
+      "venue": {
+        "name": "The City Ground"
+      }
+    },
+    {
+      "team": {
+        "id": 66,
+        "name": "Aston Villa",
+        "code": "AST",
+        "country": "England",
+        "national": false,
+        "logo": "https://media.api-sports.io/football/teams/66.png"
+      },
+      "venue": {
+        "name": "Villa Park"
+      }
+    }
+  ]
+}

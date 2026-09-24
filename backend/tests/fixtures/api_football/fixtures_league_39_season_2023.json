@@ -1,0 +1,695 @@
+{
+  "get": "fixtures",
+  "parameters": {
+    "league": "39",
+    "season": "2023"
+  },
+  "errors": [],
+  "results": 10,
+  "paging": {
+    "current": 1,
+    "total": 1
+  },
+  "response": [
+    {
+      "fixture": {
+        "id": 1035037,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-11T19:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Turf Moor",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 44,
+          "name": "Burnley",
+          "logo": "https://media.api-sports.io/football/teams/44.png",
+          "winner": false
+        },
+        "away": {
+          "id": 50,
+          "name": "Manchester City",
+          "logo": "https://media.api-sports.io/football/teams/50.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 3
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 2
+        },
+        "fulltime": {
+          "home": 0,
+          "away": 3
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1035038,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-12T11:30:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Emirates Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 42,
+          "name": "Arsenal",
+          "logo": "https://media.api-sports.io/football/teams/42.png",
+          "winner": true
+        },
+        "away": {
+          "id": 65,
+          "name": "Nottingham Forest",
+          "logo": "https://media.api-sports.io/football/teams/65.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 2,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1035039,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-12T14:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Vitality Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 35,
+          "name": "Bournemouth",
+          "logo": "https://media.api-sports.io/football/teams/35.png",
+          "winner": null
+        },
+        "away": {
+          "id": 48,
+          "name": "West Ham",
+          "logo": "https://media.api-sports.io/football/teams/48.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 1,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1035040,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-12T14:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "American Express Community Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 51,
+          "name": "Brighton",
+          "logo": "https://media.api-sports.io/football/teams/51.png",
+          "winner": true
+        },
+        "away": {
+          "id": 1359,
+          "name": "Luton",
+          "logo": "https://media.api-sports.io/football/teams/1359.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 4,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 4,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1035041,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-12T14:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Goodison Park",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 45,
+          "name": "Everton",
+          "logo": "https://media.api-sports.io/football/teams/45.png",
+          "winner": false
+        },
+        "away": {
+          "id": 36,
+          "name": "Fulham",
+          "logo": "https://media.api-sports.io/football/teams/36.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 0,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1035042,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-12T14:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Bramall Lane",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 62,
+          "name": "Sheffield Utd",
+          "logo": "https://media.api-sports.io/football/teams/62.png",
+          "winner": false
+        },
+        "away": {
+          "id": 52,
+          "name": "Crystal Palace",
+          "logo": "https://media.api-sports.io/football/teams/52.png",
+          "winner": true
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 0,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1035043,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-12T16:30:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "St. James' Park",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 34,
+          "name": "Newcastle",
+          "logo": "https://media.api-sports.io/football/teams/34.png",
+          "winner": true
+        },
+        "away": {
+          "id": 66,
+          "name": "Aston Villa",
+          "logo": "https://media.api-sports.io/football/teams/66.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 5,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 1
+        },
+        "fulltime": {
+          "home": 5,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1035044,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-13T13:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Gtech Community Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 55,
+          "name": "Brentford",
+          "logo": "https://media.api-sports.io/football/teams/55.png",
+          "winner": null
+        },
+        "away": {
+          "id": 47,
+          "name": "Tottenham",
+          "logo": "https://media.api-sports.io/football/teams/47.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 2
+        },
+        "fulltime": {
+          "home": 2,
+          "away": 2
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1035045,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-13T15:30:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Stamford Bridge",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 49,
+          "name": "Chelsea",
+          "logo": "https://media.api-sports.io/football/teams/49.png",
+          "winner": null
+        },
+        "away": {
+          "id": 40,
+          "name": "Liverpool",
+          "logo": "https://media.api-sports.io/football/teams/40.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 1
+        },
+        "fulltime": {
+          "home": 1,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1035046,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2023-08-14T19:00:00+00:00",
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Old Trafford",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/39.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2023,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 33,
+          "name": "Manchester United",
+          "logo": "https://media.api-sports.io/football/teams/33.png",
+          "winner": true
+        },
+        "away": {
+          "id": 39,
+          "name": "Wolves",
+          "logo": "https://media.api-sports.io/football/teams/39.png",
+          "winner": false
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 1,
+          "away": 0
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    }
+  ]
+}

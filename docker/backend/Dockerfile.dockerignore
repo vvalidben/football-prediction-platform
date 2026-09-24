@@ -1,0 +1,9 @@
+# Allow-list: only what the backend image needs.
+*
+!backend/pyproject.toml
+!backend/alembic.ini
+!backend/alembic/**
+!backend/app/**
+!docker/backend/entrypoint.sh
+**/__pycache__
+**/*.pyc

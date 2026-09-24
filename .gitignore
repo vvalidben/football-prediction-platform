@@ -1,0 +1,41 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Editors / OS
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# Provider coverage reports (raw provider responses)
+backend/reports/
+
+# MLflow tracking store and artifacts
+backend/mlruns/
+backend/mlflow.db
+
+# Generated knowledge-graph output (build artefact, not source)
+graphify-out/
+
+# Trained model artefacts: binaries, reproducible by retraining
+backend/models/

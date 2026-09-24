@@ -1,0 +1,575 @@
+{
+  "get": "fixtures",
+  "parameters": {
+    "league": "39",
+    "season": "2022"
+  },
+  "errors": [],
+  "results": 10,
+  "paging": {
+    "current": 1,
+    "total": 1
+  },
+  "response": [
+    {
+      "fixture": {
+        "id": 868000,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2022-08-05T19:00:00+00:00",
+        "venue": {
+          "id": null,
+          "name": "Selhurst Park",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "season": 2022,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 52,
+          "name": "Crystal Palace"
+        },
+        "away": {
+          "id": 42,
+          "name": "Arsenal"
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": 0,
+          "away": 2
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 868001,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2022-08-06T11:30:00+00:00",
+        "venue": {
+          "id": null,
+          "name": "Craven Cottage",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "season": 2022,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 36,
+          "name": "Fulham"
+        },
+        "away": {
+          "id": 40,
+          "name": "Liverpool"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 2,
+          "away": 2
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 868002,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2022-08-06T14:00:00+00:00",
+        "venue": {
+          "id": null,
+          "name": "Vitality Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "season": 2022,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 35,
+          "name": "Bournemouth"
+        },
+        "away": {
+          "id": 66,
+          "name": "Aston Villa"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 2,
+          "away": 0
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 868003,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2022-08-06T14:00:00+00:00",
+        "venue": {
+          "id": null,
+          "name": "Elland Road",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "season": 2022,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 63,
+          "name": "Leeds"
+        },
+        "away": {
+          "id": 39,
+          "name": "Wolves"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 1,
+          "away": 1
+        },
+        "fulltime": {
+          "home": 2,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 868004,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2022-08-06T14:00:00+00:00",
+        "venue": {
+          "id": null,
+          "name": "St. James' Park",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "season": 2022,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 34,
+          "name": "Newcastle"
+        },
+        "away": {
+          "id": 65,
+          "name": "Nottingham Forest"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 0
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 2,
+          "away": 0
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 868005,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2022-08-06T14:00:00+00:00",
+        "venue": {
+          "id": null,
+          "name": "Tottenham Hotspur Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "season": 2022,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 47,
+          "name": "Tottenham"
+        },
+        "away": {
+          "id": 41,
+          "name": "Southampton"
+        }
+      },
+      "goals": {
+        "home": 4,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 2,
+          "away": 1
+        },
+        "fulltime": {
+          "home": 4,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 868006,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2022-08-06T16:30:00+00:00",
+        "venue": {
+          "id": null,
+          "name": "Goodison Park",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "season": 2022,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 45,
+          "name": "Everton"
+        },
+        "away": {
+          "id": 49,
+          "name": "Chelsea"
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 1
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": 0,
+          "away": 1
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 868007,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2022-08-07T13:00:00+00:00",
+        "venue": {
+          "id": null,
+          "name": "King Power Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "season": 2022,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 46,
+          "name": "Leicester"
+        },
+        "away": {
+          "id": 55,
+          "name": "Brentford"
+        }
+      },
+      "goals": {
+        "home": 2,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 2
+        },
+        "fulltime": {
+          "home": 2,
+          "away": 2
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 868008,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2022-08-07T13:00:00+00:00",
+        "venue": {
+          "id": null,
+          "name": "Old Trafford",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "season": 2022,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 33,
+          "name": "Manchester United"
+        },
+        "away": {
+          "id": 51,
+          "name": "Brighton"
+        }
+      },
+      "goals": {
+        "home": 1,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 2
+        },
+        "fulltime": {
+          "home": 1,
+          "away": 2
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 868009,
+        "referee": null,
+        "timezone": "UTC",
+        "date": "2022-08-07T15:30:00+00:00",
+        "venue": {
+          "id": null,
+          "name": "London Stadium",
+          "city": null
+        },
+        "status": {
+          "long": "Match Finished",
+          "short": "FT",
+          "elapsed": 90
+        }
+      },
+      "league": {
+        "id": 39,
+        "name": "Premier League",
+        "season": 2022,
+        "round": "Regular Season - 1"
+      },
+      "teams": {
+        "home": {
+          "id": 48,
+          "name": "West Ham"
+        },
+        "away": {
+          "id": 50,
+          "name": "Manchester City"
+        }
+      },
+      "goals": {
+        "home": 0,
+        "away": 2
+      },
+      "score": {
+        "halftime": {
+          "home": 0,
+          "away": 1
+        },
+        "fulltime": {
+          "home": 0,
+          "away": 2
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    }
+  ]
+}

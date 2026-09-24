@@ -1,0 +1,20 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  --color-pitch-50: #f0f9f3;
+  --color-pitch-100: #dbf0e1;
+  --color-pitch-500: #2f9e5b;
+  --color-pitch-600: #22804a;
+  --color-pitch-700: #1d663d;
+  --color-pitch-900: #133f27;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-slate-50 font-sans text-slate-800 antialiased;
+}

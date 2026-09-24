@@ -1,0 +1,279 @@
+# Production stack. Standalone — use this file *instead of* docker-compose.yml:
+#
+#     docker compose -f docker-compose.prod.yml --env-file .env.production up -d
+#
+# The root docker-compose.yml is the development stack: it publishes the database
+# and cache on localhost and runs in development mode. This file does neither.
+#
+# What is different here:
+#   * ENVIRONMENT=production, so /docs and /openapi.json are withheld;
+#   * PostgreSQL and Redis are reachable only inside the network — no host ports;
+#   * only the frontend publishes a port, behind your own TLS terminator;
+#   * images are pinned by tag, so a deploy is a known artefact, not "whatever
+#     builds today" (build: is kept for hosts that build in place).
+#
+# See DEPLOYMENT.md before the first deploy.
+
+name: football-prediction-prod
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+x-backend-env: &backend-env
+  ENVIRONMENT: production
+  LOG_LEVEL: ${LOG_LEVEL:-INFO}
+  POSTGRES_HOST: postgres
+  POSTGRES_PORT: 5432
+  POSTGRES_USER: ${POSTGRES_USER:?set POSTGRES_USER}
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+  POSTGRES_DB: ${POSTGRES_DB:?set POSTGRES_DB}
+  REDIS_HOST: redis
+  REDIS_PORT: 6379
+  REDIS_DB: ${REDIS_DB:-0}
+  REDIS_PASSWORD: ${REDIS_PASSWORD:?set REDIS_PASSWORD}
+  API_FOOTBALL_API_KEY: ${API_FOOTBALL_API_KEY:-}
+  API_FOOTBALL_BASE_URL: ${API_FOOTBALL_BASE_URL:-https://v3.football.api-sports.io}
+  API_FOOTBALL_REQUESTS_PER_MINUTE: ${API_FOOTBALL_REQUESTS_PER_MINUTE:-10}
+  PROVIDER_TIMEOUT_SECONDS: ${PROVIDER_TIMEOUT_SECONDS:-10}
+  PROVIDER_MAX_ATTEMPTS: ${PROVIDER_MAX_ATTEMPTS:-4}
+  RATE_LIMIT_ENABLED: ${RATE_LIMIT_ENABLED:-true}
+  RATE_LIMIT_REQUESTS: ${RATE_LIMIT_REQUESTS:-300}
+  RATE_LIMIT_PREDICT_REQUESTS: ${RATE_LIMIT_PREDICT_REQUESTS:-30}
+  RATE_LIMIT_WINDOW_SECONDS: ${RATE_LIMIT_WINDOW_SECONDS:-60}
+  CACHE_ENABLED: ${CACHE_ENABLED:-true}
+  STATUS_CACHE_SECONDS: ${STATUS_CACHE_SECONDS:-30}
+  DEPENDENCY_TIMEOUT_SECONDS: ${DEPENDENCY_TIMEOUT_SECONDS:-2}
+  HEALTH_CHECK_TIMEOUT_SECONDS: ${HEALTH_CHECK_TIMEOUT_SECONDS:-3}
+
+x-jobs-env: &jobs-env
+  JOBS_ENABLED: ${JOBS_ENABLED:-true}
+  JOB_COMPETITIONS: ${JOB_COMPETITIONS:-}
+  JOB_PROVIDER: ${JOB_PROVIDER:-api_football}
+  SCHEDULE_FIXTURES_MINUTES: ${SCHEDULE_FIXTURES_MINUTES:-360}
+  SCHEDULE_RESULTS_MINUTES: ${SCHEDULE_RESULTS_MINUTES:-60}
+  SCHEDULE_STATISTICS_MINUTES: ${SCHEDULE_STATISTICS_MINUTES:-180}
+  SCHEDULE_FEATURES_MINUTES: ${SCHEDULE_FEATURES_MINUTES:-120}
+  SCHEDULE_PREDICTIONS_MINUTES: ${SCHEDULE_PREDICTIONS_MINUTES:-180}
+  SCHEDULE_EVALUATION_MINUTES: ${SCHEDULE_EVALUATION_MINUTES:-120}
+  SCHEDULE_RETRAIN_MINUTES: ${SCHEDULE_RETRAIN_MINUTES:-1440}
+  SCHEDULE_FAILURE_REPORT_MINUTES: ${SCHEDULE_FAILURE_REPORT_MINUTES:-1440}
+  PREDICTION_HORIZON_DAYS: ${PREDICTION_HORIZON_DAYS:-7}
+  RETRAIN_ENABLED: ${RETRAIN_ENABLED:-true}
+  RETRAIN_EVERY_DAYS: ${RETRAIN_EVERY_DAYS:-30}
+  RETRAIN_MIN_NEW_MATCHES: ${RETRAIN_MIN_NEW_MATCHES:-100}
+  TASK_MAX_RETRIES: ${TASK_MAX_RETRIES:-5}
+  TASK_RETRY_BACKOFF_SECONDS: ${TASK_RETRY_BACKOFF_SECONDS:-10}
+
+x-hardening: &hardening
+  security_opt:
+    - no-new-privileges:true
+  cap_drop:
+    - ALL
+  read_only: true
+  tmpfs:
+    - /tmp:size=64m
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: always
+    # No `ports`: the database is reachable only from this network. Reach it for
+    # maintenance with `docker compose ... exec postgres psql`, or an SSH tunnel.
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?set POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:?set POSTGRES_DB}
+      # Keep the data checksummed: silent corruption is worse than a loud failure.
+      POSTGRES_INITDB_ARGS: "--data-checksums"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ${BACKUP_DIR:-./backups}:/backups
+    security_opt:
+      - no-new-privileges:true
+    logging: *logging
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    stop_grace_period: 1m
+    deploy:
+      resources:
+        limits:
+          memory: ${POSTGRES_MEMORY:-4g}
+          cpus: "${POSTGRES_CPUS:-2.0}"
+
+  redis:
+    image: redis:7.4-alpine
+    restart: always
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?set REDIS_PASSWORD}
+    command:
+      - sh
+      - -c
+      - exec redis-server --appendonly yes --requirepass "$$REDIS_PASSWORD"
+        --maxmemory ${REDIS_MAXMEMORY:-256mb} --maxmemory-policy noeviction
+    volumes:
+      - redis-data:/data
+    security_opt:
+      - no-new-privileges:true
+    logging: *logging
+    healthcheck:
+      test: ["CMD-SHELL", "REDISCLI_AUTH=\"$$REDIS_PASSWORD\" redis-cli ping | grep -q PONG"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    deploy:
+      resources:
+        limits:
+          memory: ${REDIS_MEMORY:-512m}
+          cpus: "1.0"
+
+  backend:
+    image: ${BACKEND_IMAGE:-football-prediction-backend}:${IMAGE_TAG:-latest}
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    restart: always
+    environment:
+      <<: *backend-env
+      # This is the only service that migrates: Alembic locks its version table,
+      # so a second instance would wait rather than race, but one owner is clearer.
+      RUN_MIGRATIONS: ${RUN_MIGRATIONS:-true}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    <<: *hardening
+    logging: *logging
+    stop_grace_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: ${BACKEND_MEMORY:-1g}
+          cpus: "${BACKEND_CPUS:-2.0}"
+
+  worker:
+    image: ${BACKEND_IMAGE:-football-prediction-backend}:${IMAGE_TAG:-latest}
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    restart: always
+    environment:
+      <<: [*backend-env, *jobs-env]
+      RUN_MIGRATIONS: "false"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
+    entrypoint: []
+    command:
+      - celery
+      - -A
+      - app.tasks.celery_app:celery_app
+      - worker
+      - --loglevel=info
+      - --concurrency=${WORKER_CONCURRENCY:-2}
+      # Recycle workers periodically: a long-lived process that loads models can
+      # only grow.
+      - --max-tasks-per-child=${WORKER_MAX_TASKS:-50}
+    <<: *hardening
+    logging: *logging
+    healthcheck:
+      test: ["CMD-SHELL", "celery -A app.tasks.celery_app:celery_app inspect ping || exit 1"]
+      interval: 60s
+      timeout: 20s
+      retries: 3
+      start_period: 60s
+    stop_grace_period: 2m
+    deploy:
+      resources:
+        limits:
+          memory: ${WORKER_MEMORY:-2g}
+          cpus: "${WORKER_CPUS:-2.0}"
+
+  beat:
+    image: ${BACKEND_IMAGE:-football-prediction-backend}:${IMAGE_TAG:-latest}
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    restart: always
+    environment:
+      <<: [*backend-env, *jobs-env]
+      RUN_MIGRATIONS: "false"
+    depends_on:
+      redis:
+        condition: service_healthy
+      worker:
+        condition: service_started
+    entrypoint: []
+    command:
+      - celery
+      - -A
+      - app.tasks.celery_app:celery_app
+      - beat
+      - --loglevel=info
+      - --schedule=/tmp/celerybeat-schedule
+    <<: *hardening
+    logging: *logging
+    healthcheck:
+      disable: true
+    deploy:
+      # Exactly one scheduler: two would double every job.
+      replicas: 1
+      resources:
+        limits:
+          memory: 256m
+          cpus: "0.5"
+
+  frontend:
+    image: ${FRONTEND_IMAGE:-football-prediction-frontend}:${IMAGE_TAG:-latest}
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-/api}
+    restart: always
+    environment:
+      BACKEND_UPSTREAM: http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    # Published to the host for your TLS terminator (nginx, Caddy, Traefik, a cloud
+    # load balancer) to sit in front of. Bind to 127.0.0.1 when the terminator runs
+    # on the same host: PUBLIC_BIND=127.0.0.1
+    ports:
+      - "${PUBLIC_BIND:-0.0.0.0}:${PUBLIC_PORT:-80}:80"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+      - NET_BIND_SERVICE
+      - DAC_OVERRIDE
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
+      - /etc/nginx/conf.d
+    logging: *logging
+    deploy:
+      resources:
+        limits:
+          memory: 128m
+          cpus: "0.5"
+
+volumes:
+  postgres-data:
+  redis-data:

@@ -1,0 +1,1196 @@
+{
+  "generated_at": "2026-09-23T21:57:31.415239+00:00",
+  "plan": {
+    "plan": "Free",
+    "active": true,
+    "requests_used_today": 13,
+    "requests_limit_day": 100
+  },
+  "competitions": [
+    {
+      "league_id": 39,
+      "name": "Premier League",
+      "type": "League",
+      "country": "England",
+      "seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "earliest_season": 2010,
+      "latest_season": 2026,
+      "current_season": 2026,
+      "has_2024": true,
+      "has_2025": true,
+      "coverage_2024": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": true,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": true,
+        "predictions": true,
+        "odds": false
+      },
+      "coverage_latest": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": true,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": true,
+        "predictions": true,
+        "odds": true
+      },
+      "expected_name": "Premier League",
+      "name_matches": true,
+      "expected_country": "England"
+    },
+    {
+      "league_id": 140,
+      "name": "La Liga",
+      "type": "League",
+      "country": "Spain",
+      "seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "earliest_season": 2010,
+      "latest_season": 2026,
+      "current_season": 2026,
+      "has_2024": true,
+      "has_2025": true,
+      "coverage_2024": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": true,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": true,
+        "predictions": true,
+        "odds": false
+      },
+      "coverage_latest": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": true,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": true,
+        "predictions": true,
+        "odds": true
+      },
+      "expected_name": "La Liga",
+      "name_matches": true,
+      "expected_country": "Spain"
+    },
+    {
+      "league_id": 135,
+      "name": "Serie A",
+      "type": "League",
+      "country": "Italy",
+      "seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "earliest_season": 2010,
+      "latest_season": 2026,
+      "current_season": 2026,
+      "has_2024": true,
+      "has_2025": true,
+      "coverage_2024": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": true,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": true,
+        "predictions": true,
+        "odds": false
+      },
+      "coverage_latest": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": true,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": true,
+        "predictions": true,
+        "odds": true
+      },
+      "expected_name": "Serie A",
+      "name_matches": true,
+      "expected_country": "Italy"
+    },
+    {
+      "league_id": 78,
+      "name": "Bundesliga",
+      "type": "League",
+      "country": "Germany",
+      "seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "earliest_season": 2010,
+      "latest_season": 2026,
+      "current_season": 2026,
+      "has_2024": true,
+      "has_2025": true,
+      "coverage_2024": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": true,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": true,
+        "predictions": true,
+        "odds": false
+      },
+      "coverage_latest": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": true,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": true,
+        "predictions": true,
+        "odds": true
+      },
+      "expected_name": "Bundesliga",
+      "name_matches": true,
+      "expected_country": "Germany"
+    },
+    {
+      "league_id": 61,
+      "name": "Ligue 1",
+      "type": "League",
+      "country": "France",
+      "seasons": [
+        2010,
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "earliest_season": 2010,
+      "latest_season": 2026,
+      "current_season": 2026,
+      "has_2024": true,
+      "has_2025": true,
+      "coverage_2024": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": true,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": true,
+        "predictions": true,
+        "odds": false
+      },
+      "coverage_latest": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": true,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": true,
+        "predictions": true,
+        "odds": true
+      },
+      "expected_name": "Ligue 1",
+      "name_matches": true,
+      "expected_country": "France"
+    },
+    {
+      "league_id": 2,
+      "name": "UEFA Champions League",
+      "type": "Cup",
+      "country": "World",
+      "seasons": [
+        2011,
+        2012,
+        2013,
+        2014,
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "earliest_season": 2011,
+      "latest_season": 2026,
+      "current_season": 2026,
+      "has_2024": true,
+      "has_2025": true,
+      "coverage_2024": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": true,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": true,
+        "predictions": true,
+        "odds": false
+      },
+      "coverage_latest": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": true,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": true,
+        "predictions": true,
+        "odds": false
+      },
+      "expected_name": "UEFA Champions League",
+      "name_matches": true,
+      "expected_country": "World"
+    },
+    {
+      "league_id": 200,
+      "name": "Botola Pro",
+      "type": "League",
+      "country": "Morocco",
+      "seasons": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "earliest_season": 2016,
+      "latest_season": 2026,
+      "current_season": 2026,
+      "has_2024": true,
+      "has_2025": true,
+      "coverage_2024": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": false,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": false,
+        "predictions": true,
+        "odds": false
+      },
+      "coverage_latest": {
+        "fixtures.events": false,
+        "fixtures.lineups": false,
+        "fixtures.statistics_fixtures": false,
+        "fixtures.statistics_players": false,
+        "standings": true,
+        "players": false,
+        "top_scorers": false,
+        "top_assists": false,
+        "top_cards": false,
+        "injuries": false,
+        "predictions": true,
+        "odds": false
+      },
+      "expected_name": "Botola Pro",
+      "name_matches": true,
+      "expected_country": "Morocco"
+    },
+    {
+      "league_id": 1,
+      "name": "World Cup",
+      "type": "Cup",
+      "country": "World",
+      "seasons": [
+        2010,
+        2014,
+        2018,
+        2022,
+        2026
+      ],
+      "earliest_season": 2010,
+      "latest_season": 2026,
+      "current_season": 2026,
+      "has_2024": false,
+      "has_2025": false,
+      "coverage_2024": {},
+      "coverage_latest": {
+        "fixtures.events": true,
+        "fixtures.lineups": true,
+        "fixtures.statistics_fixtures": true,
+        "fixtures.statistics_players": true,
+        "standings": true,
+        "players": true,
+        "top_scorers": true,
+        "top_assists": true,
+        "top_cards": true,
+        "injuries": true,
+        "predictions": true,
+        "odds": false
+      },
+      "expected_name": "World Cup",
+      "name_matches": true,
+      "expected_country": "World"
+    }
+  ],
+  "observations": {
+    "Premier League": {
+      "league_id": 39,
+      "seasons_tried": [
+        {
+          "season": 2024,
+          "error": null
+        }
+      ],
+      "finished_fixtures_in_season": 380,
+      "season_used": 2024,
+      "fixture": {
+        "fixture_id": 1208213,
+        "date": "2025-01-04T15:00:00+00:00",
+        "status": "FT",
+        "teams": "Bournemouth v Everton",
+        "goals": {
+          "home": 1,
+          "away": 0
+        },
+        "halftime": {
+          "home": 0,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 1,
+          "away": 0
+        },
+        "referee": "J. Brooks",
+        "venue": "Vitality Stadium"
+      },
+      "statistics": {
+        "teams_returned": 2,
+        "types_returned": [
+          "Ball Possession",
+          "Blocked Shots",
+          "Corner Kicks",
+          "Fouls",
+          "Goalkeeper Saves",
+          "Offsides",
+          "Passes %",
+          "Passes accurate",
+          "Red Cards",
+          "Shots insidebox",
+          "Shots off Goal",
+          "Shots on Goal",
+          "Shots outsidebox",
+          "Total Shots",
+          "Total passes",
+          "Yellow Cards",
+          "expected_goals",
+          "goals_prevented"
+        ],
+        "wanted": {
+          "Shots on Goal": "present",
+          "Shots off Goal": "present",
+          "Total Shots": "present",
+          "Blocked Shots": "present",
+          "Shots insidebox": "present",
+          "Shots outsidebox": "present",
+          "Fouls": "present",
+          "Corner Kicks": "present",
+          "Offsides": "present",
+          "Ball Possession": "present",
+          "Yellow Cards": "present",
+          "Red Cards": "null",
+          "Goalkeeper Saves": "present",
+          "Total passes": "present",
+          "Passes accurate": "present",
+          "Passes %": "present",
+          "expected_goals": "present",
+          "goals_prevented": "present"
+        },
+        "sample": {
+          "Ball Possession": [
+            "58%",
+            "42%"
+          ],
+          "Blocked Shots": [
+            4,
+            0
+          ],
+          "Corner Kicks": [
+            9,
+            3
+          ],
+          "Fouls": [
+            15,
+            14
+          ],
+          "Goalkeeper Saves": [
+            0,
+            7
+          ],
+          "Offsides": [
+            1,
+            0
+          ]
+        }
+      },
+      "lineups": {
+        "teams_returned": 2,
+        "formation": "4-2-3-1",
+        "start_xi": 11,
+        "substitutes": 9,
+        "coach": true,
+        "player_ids": true,
+        "positions": true,
+        "grid": true
+      },
+      "odds": {
+        "rows": 0,
+        "bookmakers": 0,
+        "bookmaker_names": [],
+        "markets": [],
+        "market_count": 0,
+        "update_timestamp": null
+      },
+      "events": {
+        "rows": 13,
+        "types": [
+          "Card",
+          "Goal",
+          "subst"
+        ],
+        "error": null
+      },
+      "predictions": {
+        "rows": 1,
+        "fields": [
+          "advice",
+          "goals",
+          "percent",
+          "under_over",
+          "win_or_draw",
+          "winner"
+        ],
+        "percent": {
+          "home": "45%",
+          "draw": "45%",
+          "away": "10%"
+        },
+        "advice": "Combo Double chance : Bournemouth or draw and -3.5 goals",
+        "has_comparison": true,
+        "has_h2h": true
+      },
+      "injuries": {
+        "rows": 3168,
+        "has_player_id": true,
+        "reason": "Ankle Injury",
+        "type": "Missing Fixture",
+        "fixture_date": "2024-08-16T19:00:00+00:00",
+        "fixture_linked": true
+      },
+      "players": {
+        "players_on_page": 20,
+        "pages_available": 57,
+        "fields": {
+          "appearances": true,
+          "minutes": true,
+          "rating": true,
+          "goals": false,
+          "assists": true,
+          "shots_total": true,
+          "shots_on": true,
+          "passes_total": true,
+          "key_passes": true,
+          "tackles": true,
+          "interceptions": true,
+          "duels_won": true,
+          "yellow_cards": true,
+          "red_cards": true
+        }
+      },
+      "standings": {
+        "groups": 1,
+        "rows": 20,
+        "error": null
+      }
+    },
+    "Botola Pro": {
+      "league_id": 200,
+      "seasons_tried": [
+        {
+          "season": 2024,
+          "error": null
+        }
+      ],
+      "finished_fixtures_in_season": 244,
+      "season_used": 2024,
+      "fixture": {
+        "fixture_id": 1327544,
+        "date": "2024-12-28T17:00:00+00:00",
+        "status": "FT",
+        "teams": "FUS Rabat v UTS Rabat",
+        "goals": {
+          "home": 2,
+          "away": 0
+        },
+        "halftime": {
+          "home": 1,
+          "away": 0
+        },
+        "fulltime": {
+          "home": 2,
+          "away": 0
+        },
+        "referee": "N. Nachit",
+        "venue": "Stade Municipal de K\u00e9nitra"
+      },
+      "statistics": {
+        "teams_returned": 2,
+        "types_returned": [
+          "Ball Possession",
+          "Blocked Shots",
+          "Corner Kicks",
+          "Fouls",
+          "Goalkeeper Saves",
+          "Offsides",
+          "Passes %",
+          "Passes accurate",
+          "Red Cards",
+          "Shots insidebox",
+          "Shots off Goal",
+          "Shots on Goal",
+          "Shots outsidebox",
+          "Total Shots",
+          "Total passes",
+          "Yellow Cards",
+          "expected_goals",
+          "goals_prevented"
+        ],
+        "wanted": {
+          "Shots on Goal": "null",
+          "Shots off Goal": "null",
+          "Total Shots": "null",
+          "Blocked Shots": "null",
+          "Shots insidebox": "null",
+          "Shots outsidebox": "null",
+          "Fouls": "null",
+          "Corner Kicks": "null",
+          "Offsides": "null",
+          "Ball Possession": "null",
+          "Yellow Cards": "present",
+          "Red Cards": "present",
+          "Goalkeeper Saves": "null",
+          "Total passes": "null",
+          "Passes accurate": "null",
+          "Passes %": "null",
+          "expected_goals": "null",
+          "goals_prevented": "null"
+        },
+        "sample": {
+          "Ball Possession": [
+            null,
+            null
+          ],
+          "Blocked Shots": [
+            null,
+            null
+          ],
+          "Corner Kicks": [
+            null,
+            null
+          ],
+          "Fouls": [
+            null,
+            null
+          ],
+          "Goalkeeper Saves": [
+            null,
+            null
+          ],
+          "Offsides": [
+            null,
+            null
+          ]
+        }
+      },
+      "lineups": {
+        "teams_returned": 2,
+        "formation": "4-4-2",
+        "start_xi": 11,
+        "substitutes": 9,
+        "coach": true,
+        "player_ids": true,
+        "positions": true,
+        "grid": true
+      },
+      "odds": {
+        "rows": 0,
+        "bookmakers": 0,
+        "bookmaker_names": [],
+        "markets": [],
+        "market_count": 0,
+        "update_timestamp": null
+      },
+      "injuries": {
+        "rows": 0,
+        "has_player_id": false,
+        "reason": null,
+        "type": null,
+        "fixture_date": null,
+        "fixture_linked": false
+      },
+      "players": {
+        "players_on_page": 20,
+        "pages_available": 35,
+        "fields": {
+          "appearances": true,
+          "minutes": true,
+          "rating": false,
+          "goals": true,
+          "assists": false,
+          "shots_total": false,
+          "shots_on": false,
+          "passes_total": false,
+          "key_passes": false,
+          "tackles": false,
+          "interceptions": false,
+          "duels_won": false,
+          "yellow_cards": true,
+          "red_cards": true
+        }
+      },
+      "standings": {
+        "groups": 1,
+        "rows": 16,
+        "error": null
+      }
+    },
+    "UEFA Champions League": {
+      "league_id": 2,
+      "seasons_tried": [
+        {
+          "season": 2024,
+          "error": null
+        }
+      ],
+      "finished_fixtures_in_season": 269,
+      "season_used": 2024,
+      "fixture": {
+        "fixture_id": 1299032,
+        "date": "2024-10-23T19:00:00+00:00",
+        "status": "FT",
+        "teams": "Barcelona v Bayern M\u00fcnchen",
+        "goals": {
+          "home": 4,
+          "away": 1
+        },
+        "halftime": {
+          "home": 3,
+          "away": 1
+        },
+        "fulltime": {
+          "home": 4,
+          "away": 1
+        },
+        "referee": "S. Vin\u010di\u0107",
+        "venue": "Estadi Ol\u00edmpic Llu\u00eds Companys"
+      },
+      "statistics": {
+        "teams_returned": 2,
+        "types_returned": [
+          "Ball Possession",
+          "Blocked Shots",
+          "Corner Kicks",
+          "Fouls",
+          "Goalkeeper Saves",
+          "Offsides",
+          "Passes %",
+          "Passes accurate",
+          "Red Cards",
+          "Shots insidebox",
+          "Shots off Goal",
+          "Shots on Goal",
+          "Shots outsidebox",
+          "Total Shots",
+          "Total passes",
+          "Yellow Cards",
+          "expected_goals",
+          "goals_prevented"
+        ],
+        "wanted": {
+          "Shots on Goal": "present",
+          "Shots off Goal": "present",
+          "Total Shots": "present",
+          "Blocked Shots": "present",
+          "Shots insidebox": "present",
+          "Shots outsidebox": "present",
+          "Fouls": "present",
+          "Corner Kicks": "present",
+          "Offsides": "present",
+          "Ball Possession": "present",
+          "Yellow Cards": "present",
+          "Red Cards": "null",
+          "Goalkeeper Saves": "present",
+          "Total passes": "present",
+          "Passes accurate": "present",
+          "Passes %": "present",
+          "expected_goals": "present",
+          "goals_prevented": "present"
+        },
+        "sample": {
+          "Ball Possession": [
+            "40%",
+            "60%"
+          ],
+          "Blocked Shots": [
+            5,
+            4
+          ],
+          "Corner Kicks": [
+            5,
+            5
+          ],
+          "Fouls": [
+            11,
+            10
+          ],
+          "Goalkeeper Saves": [
+            2,
+            0
+          ],
+          "Offsides": [
+            1,
+            3
+          ]
+        }
+      },
+      "lineups": {
+        "teams_returned": 2,
+        "formation": "4-2-3-1",
+        "start_xi": 11,
+        "substitutes": 11,
+        "coach": true,
+        "player_ids": true,
+        "positions": true,
+        "grid": true
+      },
+      "odds": {
+        "rows": 0,
+        "bookmakers": 0,
+        "bookmaker_names": [],
+        "markets": [],
+        "market_count": 0,
+        "update_timestamp": null
+      }
+    }
+  },
+  "calls": [
+    {
+      "number": 1,
+      "path": "/status",
+      "params": {},
+      "reason": "plan, daily quota and rate-limit headers",
+      "outcome": "ok",
+      "results": 0,
+      "error": null,
+      "requests_remaining": "87"
+    },
+    {
+      "number": 2,
+      "path": "/leagues",
+      "params": {},
+      "reason": "league ids, seasons and per-season coverage for every target",
+      "outcome": "ok",
+      "results": 1246,
+      "error": null,
+      "requests_remaining": "86"
+    },
+    {
+      "number": 3,
+      "path": "/fixtures",
+      "params": {
+        "league": 39,
+        "season": 2024,
+        "status": "FT"
+      },
+      "reason": "Premier League: reach one completed fixture from season 2024",
+      "outcome": "ok",
+      "results": 380,
+      "error": null,
+      "requests_remaining": "85"
+    },
+    {
+      "number": 4,
+      "path": "/fixtures/statistics",
+      "params": {
+        "fixture": 1208213
+      },
+      "reason": "Premier League: which team statistics (including xG) a real fixture carries",
+      "outcome": "ok",
+      "results": 2,
+      "error": null,
+      "requests_remaining": "84"
+    },
+    {
+      "number": 5,
+      "path": "/fixtures/lineups",
+      "params": {
+        "fixture": 1208213
+      },
+      "reason": "Premier League: lineup shape \u2014 XI, formation, player ids, coach",
+      "outcome": "ok",
+      "results": 2,
+      "error": null,
+      "requests_remaining": "83"
+    },
+    {
+      "number": 6,
+      "path": "/odds",
+      "params": {
+        "fixture": 1208213
+      },
+      "reason": "Premier League: are odds retained for a completed fixture (historical depth)",
+      "outcome": "ok",
+      "results": 0,
+      "error": null,
+      "requests_remaining": "82"
+    },
+    {
+      "number": 7,
+      "path": "/fixtures/events",
+      "params": {
+        "fixture": 1208213
+      },
+      "reason": "Premier League: event feed shape (goals, cards, substitutions)",
+      "outcome": "ok",
+      "results": 13,
+      "error": null,
+      "requests_remaining": "81"
+    },
+    {
+      "number": 8,
+      "path": "/predictions",
+      "params": {
+        "fixture": 1208213
+      },
+      "reason": "Premier League: does the provider's own prediction exist, and what is in it",
+      "outcome": "ok",
+      "results": 1,
+      "error": null,
+      "requests_remaining": "80"
+    },
+    {
+      "number": 9,
+      "path": "/injuries",
+      "params": {
+        "league": 39,
+        "season": 2024
+      },
+      "reason": "Premier League: can injuries be retrieved historically by league+season",
+      "outcome": "ok",
+      "results": 3168,
+      "error": null,
+      "requests_remaining": "79"
+    },
+    {
+      "number": 10,
+      "path": "/players",
+      "params": {
+        "league": 39,
+        "season": 2024,
+        "page": 1
+      },
+      "reason": "Premier League: player season statistics, page 1 only (no pagination)",
+      "outcome": "ok",
+      "results": 20,
+      "error": null,
+      "requests_remaining": "78"
+    },
+    {
+      "number": 11,
+      "path": "/standings",
+      "params": {
+        "league": 39,
+        "season": 2024
+      },
+      "reason": "Premier League: standings availability",
+      "outcome": "ok",
+      "results": 1,
+      "error": null,
+      "requests_remaining": "77"
+    },
+    {
+      "number": 12,
+      "path": "/fixtures",
+      "params": {
+        "league": 200,
+        "season": 2024,
+        "status": "FT"
+      },
+      "reason": "Botola Pro: reach one completed fixture from season 2024",
+      "outcome": "ok",
+      "results": 244,
+      "error": null,
+      "requests_remaining": "86"
+    },
+    {
+      "number": 13,
+      "path": "/fixtures/statistics",
+      "params": {
+        "fixture": 1327544
+      },
+      "reason": "Botola Pro: which team statistics (including xG) a real fixture carries",
+      "outcome": "ok",
+      "results": 2,
+      "error": null,
+      "requests_remaining": "85"
+    },
+    {
+      "number": 14,
+      "path": "/fixtures/lineups",
+      "params": {
+        "fixture": 1327544
+      },
+      "reason": "Botola Pro: lineup shape \u2014 XI, formation, player ids, coach",
+      "outcome": "ok",
+      "results": 2,
+      "error": null,
+      "requests_remaining": "84"
+    },
+    {
+      "number": 15,
+      "path": "/odds",
+      "params": {
+        "fixture": 1327544
+      },
+      "reason": "Botola Pro: are odds retained for a completed fixture (historical depth)",
+      "outcome": "ok",
+      "results": 0,
+      "error": null,
+      "requests_remaining": "83"
+    },
+    {
+      "number": 16,
+      "path": "/injuries",
+      "params": {
+        "league": 200,
+        "season": 2024
+      },
+      "reason": "Botola Pro: can injuries be retrieved historically by league+season",
+      "outcome": "ok",
+      "results": 0,
+      "error": null,
+      "requests_remaining": "82"
+    },
+    {
+      "number": 17,
+      "path": "/players",
+      "params": {
+        "league": 200,
+        "season": 2024,
+        "page": 1
+      },
+      "reason": "Botola Pro: player season statistics, page 1 only (no pagination)",
+      "outcome": "ok",
+      "results": 20,
+      "error": null,
+      "requests_remaining": "81"
+    },
+    {
+      "number": 18,
+      "path": "/standings",
+      "params": {
+        "league": 200,
+        "season": 2024
+      },
+      "reason": "Botola Pro: standings availability",
+      "outcome": "ok",
+      "results": 1,
+      "error": null,
+      "requests_remaining": "80"
+    },
+    {
+      "number": 1,
+      "path": "/fixtures",
+      "params": {
+        "league": 2,
+        "season": 2024,
+        "status": "FT"
+      },
+      "reason": "UEFA Champions League: reach one completed fixture from season 2024",
+      "outcome": "ok",
+      "results": 269,
+      "error": null,
+      "requests_remaining": "69"
+    },
+    {
+      "number": 2,
+      "path": "/fixtures/statistics",
+      "params": {
+        "fixture": 1299032
+      },
+      "reason": "UEFA Champions League: which team statistics (including xG) a real fixture carries",
+      "outcome": "ok",
+      "results": 2,
+      "error": null,
+      "requests_remaining": "68"
+    },
+    {
+      "number": 3,
+      "path": "/fixtures/lineups",
+      "params": {
+        "fixture": 1299032
+      },
+      "reason": "UEFA Champions League: lineup shape \u2014 XI, formation, player ids, coach",
+      "outcome": "ok",
+      "results": 2,
+      "error": null,
+      "requests_remaining": "67"
+    },
+    {
+      "number": 4,
+      "path": "/odds",
+      "params": {
+        "fixture": 1299032
+      },
+      "reason": "UEFA Champions League: are odds retained for a completed fixture (historical depth)",
+      "outcome": "ok",
+      "results": 0,
+      "error": null,
+      "requests_remaining": "66"
+    }
+  ],
+  "problems": [
+    "resumed from a previous run; 18 earlier requests are listed below and were not repeated"
+  ]
+}
