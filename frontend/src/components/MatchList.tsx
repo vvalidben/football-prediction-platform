@@ -6,7 +6,16 @@ import { dateTime, scoreline } from '../format.ts'
  * Matches as rows. Each links to its prediction page, and each team to its own
  * page, so the three views are reachable from one another.
  */
-export function MatchList({ matches, showResult }: { matches: MatchRead[]; showResult?: boolean }) {
+export function MatchList({
+  matches,
+  showResult,
+  actionLabel,
+}: {
+  matches: MatchRead[]
+  showResult?: boolean
+  /** Makes the link to the prediction page the row's main action, under this name. */
+  actionLabel?: string
+}) {
   return (
     <ul className="divide-y divide-slate-100">
       {matches.map((match) => (
@@ -33,9 +42,13 @@ export function MatchList({ matches, showResult }: { matches: MatchRead[]; showR
             )}
             <Link
               to={`/matches/${String(match.id)}`}
-              className="rounded-md border border-slate-300 px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-50"
+              className={
+                actionLabel
+                  ? 'rounded-md bg-pitch-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-pitch-700'
+                  : 'rounded-md border border-slate-300 px-2 py-1 text-xs font-medium text-slate-700 hover:bg-slate-50'
+              }
             >
-              Prediction
+              {actionLabel ?? 'Prediction'}
             </Link>
           </div>
         </li>

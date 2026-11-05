@@ -193,6 +193,14 @@ export function MatchPrediction() {
       <Async state={match.state} onRetry={match.reload} loadingLabel="Loading match…">
         {(data) => (
           <PageHeader
+            eyebrow={
+              <Link
+                to={`/matches?league=${String(data.competition.id)}`}
+                className="text-xs font-medium text-pitch-700 hover:underline"
+              >
+                ← All {data.competition.name} matches
+              </Link>
+            }
             title={`${data.home_team.name} v ${data.away_team.name}`}
             subtitle={
               <>

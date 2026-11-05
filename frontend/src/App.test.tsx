@@ -32,7 +32,7 @@ describe('App', () => {
     renderAt(<App />, '/')
 
     const nav = screen.getByRole('navigation', { name: 'Main' })
-    for (const label of ['Dashboard', 'History', 'Teams', 'Models', 'Data']) {
+    for (const label of ['Dashboard', 'Matches', 'History', 'Teams', 'Models', 'Data']) {
       expect(screen.getByRole('link', { name: label })).toBeInTheDocument()
     }
     expect(nav).toBeInTheDocument()

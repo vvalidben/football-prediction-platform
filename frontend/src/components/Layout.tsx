@@ -7,6 +7,7 @@ interface LayoutProps {
 
 const pages = [
   { to: '/', label: 'Dashboard', end: true },
+  { to: '/matches', label: 'Matches', end: false },
   { to: '/history', label: 'History', end: false },
   { to: '/teams', label: 'Teams', end: false },
   { to: '/models', label: 'Models', end: false },

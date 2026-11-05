@@ -18,7 +18,7 @@ import type {
 } from './types.ts'
 
 export const getUpcomingMatches = (
-  params: { competition_id?: number; team_id?: number; limit?: number },
+  params: { competition_id?: number; team_id?: number; limit?: number; offset?: number },
   signal?: AbortSignal,
 ) => apiGet<Page<MatchRead>>('/matches/upcoming', params, signal)
 

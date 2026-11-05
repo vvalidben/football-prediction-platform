@@ -30,6 +30,15 @@ function renderPage(overrides: Record<string, unknown> = {}) {
 }
 
 describe('MatchPrediction', () => {
+  it('links back to the upcoming matches of its league', async () => {
+    renderPage()
+
+    expect(await screen.findByRole('link', { name: /All Premier League matches/ })).toHaveAttribute(
+      'href',
+      '/matches?league=7',
+    )
+  })
+
   it('shows the teams, the predicted score and the expected goals', async () => {
     renderPage()
 

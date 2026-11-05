@@ -4,6 +4,7 @@ import { Layout } from './components/Layout.tsx'
 import { Dashboard } from './pages/Dashboard.tsx'
 import { DataStatus } from './pages/DataStatus.tsx'
 import { History } from './pages/History.tsx'
+import { Matches } from './pages/Matches.tsx'
 import { MatchPrediction } from './pages/MatchPrediction.tsx'
 import { ModelPerformance } from './pages/ModelPerformance.tsx'
 import { Team } from './pages/Team.tsx'
@@ -17,6 +18,7 @@ export default function App() {
       <ErrorBoundary resetKey={location.pathname}>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/matches" element={<Matches />} />
           <Route path="/matches/:matchId" element={<MatchPrediction />} />
           <Route path="/history" element={<History />} />
           <Route path="/teams" element={<Teams />} />
