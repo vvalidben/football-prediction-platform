@@ -134,6 +134,40 @@ class TestRatings:
         assert 1500 < after < before  # regressed halfway, then a draw vs a weaker side
         assert after == pytest.approx(1500 + 0.5 * (before - 1500), abs=15)
 
+    def test_switching_competition_is_not_a_new_season(self) -> None:
+        """Season ids are per competition, so a side alternating between its league and
+        Europe changes season id every other match. Pulling it back each time collapsed
+        the ratings of exactly the best teams."""
+
+        def final_rating(*seasons: int) -> float:
+            engine = RatingEngine(FeatureConfig(elo_season_regression=0.5))
+            for n in range(20):
+                engine.add(
+                    past(
+                        n,
+                        T0 + timedelta(days=7 * n),
+                        season=seasons[n % len(seasons)],
+                        score=(3, 0),
+                    )
+                )
+            return engine.rating(1).elo
+
+        assert final_rating(1, 7) == pytest.approx(final_rating(1))
+
+    def test_a_new_year_pulls_back_once_across_competitions(self) -> None:
+        engine = RatingEngine(FeatureConfig(elo_season_regression=0.5))
+        for n in range(5):
+            engine.add(past(n, T0 + timedelta(days=7 * n), score=(3, 0)))
+        before = engine.rating(1).elo
+
+        engine.add(past(50, T0 + timedelta(days=365), season=2, score=(1, 1)))
+        once = engine.rating(1).elo
+        engine.add(past(51, T0 + timedelta(days=372), season=8, score=(1, 1)))
+        engine.add(past(52, T0 + timedelta(days=379), season=2, score=(1, 1)))
+
+        assert once == pytest.approx(1500 + 0.5 * (before - 1500), abs=15)
+        assert engine.rating(1).elo == pytest.approx(once, abs=20)
+
 
 def test_version_changes_with_any_parameter() -> None:
     base = FeatureConfig()

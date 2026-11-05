@@ -7,7 +7,8 @@
   both ratings move by the Poisson log-likelihood gradient (actual - expected
   goals). A higher defence rating means fewer goals conceded.
 - When a team plays its first match of a new season, all three ratings are pulled
-  part of the way back to the average, since squads change between seasons.
+  part of the way back to the average, since squads change between seasons. This
+  happens once a year at most, however many competitions the team plays in.
 
 Ratings only change in `add`, which the `Timeline` calls for matches whose result
 is already known, so a rating read for a target reflects only the past.
@@ -15,6 +16,7 @@ is already known, so a rating read for a target reflects only the past.
 
 import math
 from dataclasses import dataclass
+from datetime import datetime, timedelta
 
 from app.features.config import FeatureConfig
 from app.features.timeline import PastMatch
@@ -27,6 +29,8 @@ class TeamRating:
     defence: float = 0.0
     matches: int = 0
     season_id: int | None = None
+    #: When the team's current season began, across all its competitions.
+    season_started_at: datetime | None = None
 
 
 class RatingEngine:
@@ -59,19 +63,24 @@ class RatingEngine:
             base * math.exp(away.attack - home.defence),
         )
 
-    def _enter_season(self, team_id: int, season_id: int) -> TeamRating:
+    def _enter_season(self, team_id: int, season_id: int, kickoff_at: datetime) -> TeamRating:
         rating = self.teams.setdefault(team_id, TeamRating(elo=self.config.elo_initial))
-        if rating.season_id is not None and rating.season_id != season_id:
+        if rating.season_started_at is None:
+            rating.season_started_at = kickoff_at
+        elif rating.season_id != season_id and (
+            kickoff_at - rating.season_started_at >= timedelta(days=self.config.elo_season_min_days)
+        ):
             keep = 1.0 - self.config.elo_season_regression
             rating.elo = self.config.elo_initial + keep * (rating.elo - self.config.elo_initial)
             rating.attack *= keep
             rating.defence *= keep
+            rating.season_started_at = kickoff_at
         rating.season_id = season_id
         return rating
 
     def add(self, match: PastMatch) -> None:
-        home = self._enter_season(match.home_team_id, match.season_id)
-        away = self._enter_season(match.away_team_id, match.season_id)
+        home = self._enter_season(match.home_team_id, match.season_id, match.kickoff_at)
+        away = self._enter_season(match.away_team_id, match.season_id, match.kickoff_at)
 
         # Overall Elo.
         expected = self.expected_score(match.home_team_id, match.away_team_id)

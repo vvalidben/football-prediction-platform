@@ -44,6 +44,9 @@ class FeatureConfig:
     elo_home_advantage: float = 60.0
     #: Fraction of the distance to the mean removed when a team starts a new season.
     elo_season_regression: float = 0.2
+    #: A season id change only counts as a new season this long after the last one.
+    #: Season ids are per competition, so a side in a league and a cup changes id often.
+    elo_season_min_days: int = 180
     #: Goal (attack/defence) ratings: learning rate and home advantage in log-goals.
     goal_learning_rate: float = 0.05
     goal_home_advantage: float = 0.15
