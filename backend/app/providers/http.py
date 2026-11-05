@@ -77,7 +77,7 @@ class RateLimiter:
 
 
 def _retry_after(response: httpx.Response) -> float | None:
-    value = response.headers.get("Retry-After")
+    value = response.headers.get("Retry-After") or response.headers.get("X-RequestCounter-Reset")
     if value is None:
         return None
     try:

@@ -21,6 +21,7 @@ from app.providers.schemas import (
 )
 from tests.providers import builders
 from tests.providers.fake_api import FakeApiFootball
+from tests.providers.fake_football_data import PREMIER_LEAGUE, SEASON_2025, FakeFootballData
 
 
 @dataclass(frozen=True)
@@ -40,7 +41,14 @@ def _api_football() -> Subject:
     return Subject(FakeApiFootball().provider(), "39", "39:2023")
 
 
-@pytest.fixture(params=[_mock, _api_football], ids=["mock", "api_football"])
+def _football_data() -> Subject:
+    return Subject(FakeFootballData().provider(), PREMIER_LEAGUE, SEASON_2025)
+
+
+@pytest.fixture(
+    params=[_mock, _api_football, _football_data],
+    ids=["mock", "api_football", "football_data"],
+)
 def subject(request: pytest.FixtureRequest) -> Iterator[Subject]:
     factory: Callable[[], Subject] = request.param
     made = factory()

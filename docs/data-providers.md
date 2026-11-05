@@ -35,6 +35,39 @@ exists.
 **Credentials.** No API key was available in this project when the adapter was
 written. The adapter therefore follows API-Football's documented v3 format and is
 tested against recorded-style fixtures (see `backend/tests/fixtures/api_football/`).
+
+### football-data.org
+
+`football_data` is the source of current and upcoming fixtures: API-Football's free
+plan stops at 2024, while this one serves the running season. Set
+`FOOTBALL_DATA_API_KEY`, and pass `--provider football_data` to the ingestion commands
+or set `JOB_PROVIDER=football_data` for the scheduled jobs.
+
+Observed on the free plan in November 2026, with a real token:
+
+- 13 competitions (`python -m app.ingestion --provider football_data competitions`),
+  10 requests a minute. Botola Pro is not among them.
+- Seasons from 2023; earlier ones answer 403, so `FOOTBALL_DATA_FIRST_SEASON` keeps
+  them from being offered.
+- Fixtures, kickoffs, full-time and half-time scores, matchday, stage and referee. No
+  statistics, odds, lineups or injuries, so the statistics job is skipped.
+- `score.fullTime` of a shootout includes the penalties; the adapter removes them.
+
+**Adding it beside data already stored.** Run `link` first, or the sync creates a
+second copy of the competition, its teams and its matches, and training then sees
+every match twice:
+
+```bash
+python -m app.ingestion --provider football_data link --competition 2021 --to 2 --dry-run
+python -m app.ingestion --provider football_data link --competition 2021 --to 2
+python -m app.ingestion --provider football_data backfill --competition 2021
+```
+
+`--competition` is the provider's id and `--to` is the stored competition's. `link`
+writes only id mappings. Teams are matched from fixtures both providers report, then
+by name for teams with no shared fixture. Matches link during the sync by teams and
+kickoff, allowing six hours within a season, because providers disagree by up to an
+hour around clock changes. Read the dry run before applying it: it lists every pair.
 Before relying on it in production, run
 `python -m app.ingestion competitions --search "Premier"` with a real key and
 confirm responses match the fixtures.

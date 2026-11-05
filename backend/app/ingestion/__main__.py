@@ -23,6 +23,7 @@ from app.core.config import get_settings
 from app.core.logging import configure_logging
 from app.db.session import create_db_engine, create_session_factory
 from app.ingestion.history import HistoricalImport, ImportReport
+from app.ingestion.linking import link_competition
 from app.ingestion.runs import RunStats
 from app.ingestion.sync import ProviderSync, SeasonSelection, summarise
 from app.models.enums import IngestionStatus
@@ -35,7 +36,7 @@ from app.quality.report import build_report, render_text
 logger = logging.getLogger("app.ingestion")
 
 EXIT_CODES = {IngestionStatus.SUCCEEDED: 0, IngestionStatus.PARTIAL: 1, IngestionStatus.FAILED: 2}
-PROVIDER_COMMANDS = {"competitions", "sync", "backfill"}
+PROVIDER_COMMANDS = {"competitions", "sync", "backfill", "link"}
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -81,6 +82,15 @@ def _parser() -> argparse.ArgumentParser:
         action="store_true",
         help="ask again for matches the provider previously had no statistics for",
     )
+
+    link = commands.add_parser(
+        "link", help="map a provider's competition and teams onto rows already stored"
+    )
+    link.add_argument("--competition", required=True, metavar="ID", help="provider competition ID")
+    link.add_argument(
+        "--to", dest="stored_competition", required=True, type=int, help="stored competition id"
+    )
+    link.add_argument("--dry-run", action="store_true", help="show the mapping, write nothing")
 
     commands.add_parser("audit", help="run database-wide data-quality checks")
     report = commands.add_parser("report", help="print the data-quality report")
@@ -180,6 +190,8 @@ def _dispatch(
 
     assert provider is not None  # noqa: S101 - guaranteed by main()
     sync = ProviderSync(provider, session_factory)
+    if args.command == "link":
+        return _link(sync, args.competition, args.stored_competition, dry_run=args.dry_run)
     if args.command == "sync":
         runs: list[RunStats] = []
         for competition_id in args.competition:
@@ -210,6 +222,23 @@ def _dispatch(
             break
     worst = max(statuses, key=lambda s: EXIT_CODES[s], default=IngestionStatus.SUCCEEDED)
     return EXIT_CODES[worst]
+
+
+def _link(sync: ProviderSync, competition: str, stored: int, *, dry_run: bool) -> int:
+    try:
+        report = link_competition(sync, competition, stored, dry_run=dry_run)
+    except (ProviderError, ValueError) as exc:
+        logger.error("Linking competition %s failed: %s", competition, exc)
+        return 1
+    for title, mapping in (("by fixtures", report.by_fixtures), ("by name", report.by_name)):
+        print(f"Linked {title} ({len(mapping)}):")
+        for new, old in sorted(mapping.items()):
+            print(f"  {new} -> {old}")
+    print(f"New teams ({len(report.new_teams)}): {', '.join(sorted(report.new_teams))}")
+    if report.ambiguous:
+        print(f"AMBIGUOUS, left unlinked ({len(report.ambiguous)}): {report.ambiguous}")
+    print("Dry run: nothing written." if dry_run else f"Wrote {report.mappings_written} mappings.")
+    return 1 if report.ambiguous else 0
 
 
 def _list_competitions(

@@ -34,6 +34,7 @@ from app.core.config import Settings
 from app.features.__main__ import main as features_main
 from app.models import JobRun, Match, ModelVersion
 from app.models.enums import JobStatus, MatchStatus
+from app.providers.base import ProviderOperation
 from app.providers.errors import (
     AuthenticationError,
     ProviderError,
@@ -197,6 +198,8 @@ def fetch_statistics(self: Task) -> dict[str, Any]:
 
     def body(report: Any, settings: Settings) -> None:
         sync = _provider_sync(settings)
+        if not sync.provider.supports(ProviderOperation.TEAM_STATISTICS):
+            raise JobSkipped(f"{sync.provider.name} offers no team statistics")
         for competition in _competitions(settings):
             for season in sync.select_seasons(competition, "current"):
                 run = sync.sync_team_statistics(competition, season)

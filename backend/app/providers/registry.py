@@ -6,9 +6,11 @@ from collections.abc import Callable
 from app.core.config import Settings
 from app.providers.api_football import ApiFootballProvider
 from app.providers.base import FootballDataProvider
+from app.providers.football_data import FootballDataOrgProvider
 
 PROVIDERS: dict[str, Callable[[Settings], FootballDataProvider]] = {
     ApiFootballProvider.code: ApiFootballProvider.from_settings,
+    FootballDataOrgProvider.code: FootballDataOrgProvider.from_settings,
 }
 
 

@@ -21,6 +21,7 @@ from app.models import (
     Team,
 )
 from app.models.enums import CompetitionType, JobStatus, MatchStatus
+from app.providers.base import ProviderOperation
 from app.providers.errors import ProviderUnavailableError, RateLimitError
 from app.providers.mock import MockDataset, MockFootballDataProvider
 from app.providers.schemas import (
@@ -185,6 +186,25 @@ class TestFetchJobs:
         row = last_run(session_factory, "jobs.fetch_statistics")
         assert row.status is JobStatus.SUCCEEDED
         assert "statistics_inserted" in row.detail
+
+    def test_a_provider_without_statistics_skips_the_job(
+        self, session_factory: sessionmaker[Session]
+    ) -> None:
+        """Otherwise every run fails and retries, for data this provider never has."""
+
+        class NoStatistics(MockFootballDataProvider):
+            @property
+            def capabilities(self) -> frozenset[ProviderOperation]:
+                return super().capabilities - {ProviderOperation.TEAM_STATISTICS}
+
+        run(jobs.fetch_fixtures)
+        runtime.configure(new_provider_factory=lambda _: NoStatistics(provider_dataset()))
+
+        run(jobs.fetch_statistics)
+
+        row = last_run(session_factory, "jobs.fetch_statistics")
+        assert row.status is JobStatus.SKIPPED
+        assert "statistics" in row.detail["reason"]
 
     def test_without_configured_competitions_the_job_is_skipped(
         self, session_factory: sessionmaker[Session]

@@ -71,6 +71,12 @@ class Settings(BaseSettings):
     api_football_base_url: str = "https://v3.football.api-sports.io"
     # Client-side pacing; keep at or below the plan's per-minute limit.
     api_football_requests_per_minute: float = Field(default=10.0, gt=0)
+    football_data_api_key: SecretStr | None = None
+    football_data_base_url: str = "https://api.football-data.org/v4"
+    football_data_requests_per_minute: float = Field(default=10.0, gt=0)
+    # Oldest season the plan can read. The API lists seasons back to 1888 and answers
+    # 403 for those outside the plan, so older ones are not offered at all.
+    football_data_first_season: int = Field(default=2023, ge=1800)
     provider_timeout_seconds: float = Field(default=10.0, gt=0)
     provider_max_attempts: int = Field(default=4, ge=1, le=10)
 
@@ -124,7 +130,9 @@ class Settings(BaseSettings):
             return [origin.strip() for origin in value.split(",") if origin.strip()]
         return value
 
-    @field_validator("redis_password", "api_football_api_key", mode="before")
+    @field_validator(
+        "redis_password", "api_football_api_key", "football_data_api_key", mode="before"
+    )
     @classmethod
     def _empty_secret_is_none(cls, value: object) -> object:
         return None if value == "" else value

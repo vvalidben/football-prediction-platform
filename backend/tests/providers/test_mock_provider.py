@@ -75,6 +75,20 @@ class TestProviderRegistry:
         assert isinstance(provider, ApiFootballProvider)
         assert provider.code == "api_football"
 
+    def test_football_data_is_built_by_code(self) -> None:
+        from pydantic import SecretStr
+
+        from app.providers.football_data import FootballDataOrgProvider
+        from app.providers.registry import create_provider
+        from tests.tasks.test_celery_and_recording import make_settings
+
+        provider = create_provider(
+            "football_data", make_settings(football_data_api_key=SecretStr("k" * 32))
+        )
+
+        assert isinstance(provider, FootballDataOrgProvider)
+        assert provider.code == "football_data"
+
     def test_an_unknown_code_names_the_ones_that_exist(self) -> None:
         from app.providers.registry import create_provider
         from tests.tasks.test_celery_and_recording import make_settings

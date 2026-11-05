@@ -28,7 +28,7 @@ import dataclasses
 import logging
 from collections.abc import Callable, Collection, Iterable, Sequence
 from dataclasses import dataclass, field
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from typing import Any, Literal
 
 from sqlalchemy import exists, func, select, text, update
@@ -117,6 +117,10 @@ def _set_fields(entity: object, values: dict[str, Any], *, keep_when_none: Itera
             setattr(entity, name, value)
             changed = True
     return changed
+
+
+#: How far apart two providers' kickoffs can be and still describe one fixture.
+SAME_FIXTURE_WINDOW = timedelta(hours=6)
 
 
 def _find_by_external_id[E](
@@ -830,6 +834,8 @@ class ProviderSync:
                     Match.kickoff_at == record.kickoff_at,
                 )
             ).one_or_none()
+            if match is None:
+                match = self._same_fixture_at_another_time(session, season.id, home, away, record)
             if match is not None and match.season_id != season.id:
                 raise RecordConflictError(
                     f"fixture already stored as match {match.id} in another season; "
@@ -864,6 +870,25 @@ class ProviderSync:
         ):
             self._warn(dataclasses.replace(warning, entity_id=match.id))
         return outcome
+
+    def _same_fixture_at_another_time(
+        self, session: Session, season_id: int, home: Team, away: Team, record: ProviderMatch
+    ) -> Match | None:
+        """Providers disagree about kickoffs by up to an hour, typically around a clock
+        change. One season cannot hold two meetings of the same home and away teams this
+        close together, so a single nearby candidate is the same fixture."""
+        candidates = session.scalars(
+            select(Match).where(
+                Match.season_id == season_id,
+                Match.home_team_id == home.id,
+                Match.away_team_id == away.id,
+                Match.kickoff_at.between(
+                    record.kickoff_at - SAME_FIXTURE_WINDOW,
+                    record.kickoff_at + SAME_FIXTURE_WINDOW,
+                ),
+            )
+        ).all()
+        return candidates[0] if len(candidates) == 1 else None
 
     def _apply_team_statistics(
         self, session: Session, source_id: int, record: ProviderTeamMatchStatistics
