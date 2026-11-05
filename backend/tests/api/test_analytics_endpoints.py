@@ -220,6 +220,18 @@ class TestDataStatus:
         assert isinstance(body["issues"], list)
         assert isinstance(body["providers"], list)
 
+    def test_feature_coverage_counts_only_finished_matches(
+        self, client: TestClient, league: dict[str, int]
+    ) -> None:
+        """It is shown out of the finished matches, so an upcoming match's snapshot would
+        read as more than 100%: seen live as "1224 / 990". The fixture builds snapshots
+        for its upcoming matches too."""
+        coverage = client.get("/data/status").json()["coverage"]
+
+        for entry in coverage:
+            assert entry["with_features"] <= entry["finished"], entry["competition"]
+        assert any(entry["with_features"] > 0 for entry in coverage)
+
     def test_freshness_summarises_the_dashboard_panel(
         self, client: TestClient, league: dict[str, int], active_model: ModelVersion
     ) -> None:

@@ -358,6 +358,7 @@ def data_status(session: Session, *, now: datetime | None = None) -> dict[str, A
                     FeatureSnapshot.feature_set_version == version,
                 ),
             )
+            .where(Match.status == MatchStatus.FINISHED)
             .group_by(Match.competition_id)
         ).all()
     }

@@ -21,6 +21,22 @@ describe('Teams', () => {
     expect(screen.getByRole('link', { name: /Chelsea/ })).toHaveAttribute('href', '/teams/12')
   })
 
+  it('says when the list does not show every team', async () => {
+    mockApi({ '/teams': { ...page(teams), total: 395 } })
+    renderAt(<Teams />, '/teams')
+
+    expect(await screen.findByText(/Showing 2 of 395 teams/)).toBeInTheDocument()
+    expect(screen.getByText(/Search by name to find the others/)).toBeInTheDocument()
+  })
+
+  it('stays quiet when every team is listed', async () => {
+    mockApi({ '/teams': page(teams) })
+    renderAt(<Teams />, '/teams')
+    await screen.findByRole('link', { name: /Arsenal/ })
+
+    expect(screen.queryByText(/Showing/)).not.toBeInTheDocument()
+  })
+
   it('names the page in the browser tab', async () => {
     mockApi({ '/teams': page(teams) })
     renderAt(<Teams />, '/teams')

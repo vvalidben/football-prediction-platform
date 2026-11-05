@@ -46,19 +46,27 @@ export function Teams() {
                 hint={search ? undefined : 'Teams arrive with the first provider import.'}
               />
             ) : (
-              <ul className="grid gap-x-6 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">
-                {page.items.map((team) => (
-                  <li key={team.id}>
-                    <Link
-                      to={`/teams/${String(team.id)}`}
-                      className="block truncate py-1 text-sm text-slate-900 hover:underline"
-                    >
-                      {team.name}
-                      {team.country && <span className="text-slate-500"> · {team.country}</span>}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <>
+                <ul className="grid gap-x-6 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">
+                  {page.items.map((team) => (
+                    <li key={team.id}>
+                      <Link
+                        to={`/teams/${String(team.id)}`}
+                        className="block truncate py-1 text-sm text-slate-900 hover:underline"
+                      >
+                        {team.name}
+                        {team.country && <span className="text-slate-500"> · {team.country}</span>}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                {page.total > page.items.length && (
+                  <p className="mt-4 text-sm text-slate-500">
+                    Showing {page.items.length} of {page.total} teams. Search by name to find the
+                    others.
+                  </p>
+                )}
+              </>
             )
           }
         </Async>
