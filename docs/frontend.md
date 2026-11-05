@@ -8,7 +8,7 @@ and the state of the data behind all of it. Code: `frontend/src/`.
 | Route | Page | What it shows |
 | --- | --- | --- |
 | `/` | Dashboard | Data freshness, the next matches, the latest predictions, the active models, and the live health of the API, PostgreSQL and Redis |
-| `/matches` | Matches | Choose a league to list its upcoming matches by day, each with a Predict button. The league and page are in the address, so going back keeps the list |
+| `/matches` | Matches | Choose a league to list its upcoming matches by day, each with a Predict button, then narrow by team or period. The choices are in the address, so going back keeps the list |
 | `/matches/:matchId` | Match prediction | The model's record in this league, predicted score, expected goals, 1X2, exact-score distribution, total goals, over/under, both-teams-to-score, why the model predicted it ([explainability.md](explainability.md)), and both teams' recent form and statistics |
 | `/history` | Prediction history | Every stored prediction with its result, error and model version, filtered by competition, season, team, model, date or whether it has been scored ([prediction-history.md](prediction-history.md)) |
 | `/teams` | Teams | A searchable index, the way into a team page |

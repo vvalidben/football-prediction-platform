@@ -1,16 +1,27 @@
 import { useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { getCompetitions, getUpcomingMatches } from '../api/endpoints.ts'
+import { getCompetitions, getTeams, getUpcomingMatches } from '../api/endpoints.ts'
 import type { MatchRead } from '../api/types.ts'
 import { Async } from '../components/Async.tsx'
 import { MatchList } from '../components/MatchList.tsx'
 import { Card, Empty } from '../components/states.tsx'
 import { dateOnly } from '../format.ts'
+import { windowFor } from '../matchPeriods.ts'
 import { useApi } from '../hooks/useApi.ts'
 import { useDocumentTitle } from '../hooks/useDocumentTitle.ts'
 import { PageHeader } from './PageHeader.tsx'
 
 const PAGE_SIZE = 25
+
+const PERIODS = [
+  { value: '', label: 'Any time' },
+  { value: 'today', label: 'Today' },
+  { value: 'weekend', label: 'This weekend' },
+  { value: 'week', label: 'Next 7 days' },
+] as const
+
+const FILTER_CLASS =
+  'w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pitch-600'
 
 /** A whole number from the address, or null for anything else. */
 function wholeNumber(value: string | null): number | null {
@@ -44,6 +55,10 @@ export function Matches() {
   const leagueId = wholeNumber(params.get('league'))
   const pageNumber = Math.max(wholeNumber(params.get('page')) ?? 1, 1)
   const offset = (pageNumber - 1) * PAGE_SIZE
+  const teamId = wholeNumber(params.get('team'))
+  const requestedPeriod = params.get('when') ?? ''
+  const period = PERIODS.some((option) => option.value === requestedPeriod) ? requestedPeriod : ''
+  const filtered = teamId !== null || period !== ''
 
   const competitions = useApi(
     useCallback((signal: AbortSignal) => getCompetitions(signal), []),
@@ -54,10 +69,29 @@ export function Matches() {
       (signal: AbortSignal) =>
         leagueId === null
           ? Promise.resolve(null)
-          : getUpcomingMatches({ competition_id: leagueId, limit: PAGE_SIZE, offset }, signal),
-      [leagueId, offset],
+          : getUpcomingMatches(
+              {
+                competition_id: leagueId,
+                team_id: teamId ?? undefined,
+                ...windowFor(period),
+                limit: PAGE_SIZE,
+                offset,
+              },
+              signal,
+            ),
+      [leagueId, teamId, period, offset],
     ),
-    [leagueId, offset],
+    [leagueId, teamId, period, offset],
+  )
+  const leagueTeams = useApi(
+    useCallback(
+      (signal: AbortSignal) =>
+        leagueId === null
+          ? Promise.resolve(null)
+          : getTeams({ competition_id: leagueId, limit: 100 }, signal),
+      [leagueId],
+    ),
+    [leagueId],
   )
 
   const leagueName =
@@ -65,8 +99,15 @@ export function Matches() {
       ? competitions.state.data.items.find((item) => item.id === leagueId)?.name
       : undefined
 
+  /** The address for this league with these filters, back on the first page. */
+  const filters = (team: number | null, when: string, page?: number) => ({
+    league: String(leagueId),
+    ...(team !== null ? { team: String(team) } : {}),
+    ...(when ? { when } : {}),
+    ...(page ? { page: String(page) } : {}),
+  })
   const goToPage = (next: number) => {
-    setParams({ league: String(leagueId), page: String(next) })
+    setParams(filters(teamId, period, next))
   }
 
   return (
@@ -76,30 +117,69 @@ export function Matches() {
         subtitle="Choose a league, then press Predict on any match it has coming up."
       />
 
-      <Card title="League">
+      <Card title="Find a match">
         <Async
           state={competitions.state}
           onRetry={competitions.reload}
           loadingLabel="Loading leagues…"
         >
           {(page) => (
-            <label className="flex flex-col gap-1 text-sm sm:max-w-sm">
-              <span className="sr-only">League</span>
-              <select
-                value={leagueId ?? ''}
-                onChange={(event) => {
-                  setParams(event.target.value ? { league: event.target.value } : {})
-                }}
-                className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pitch-600"
-              >
-                <option value="">Select a league…</option>
-                {page.items.map((item) => (
-                  <option key={item.id} value={item.id}>
-                    {item.country ? `${item.name} · ${item.country}` : item.name}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <label className="flex flex-col gap-1 text-sm">
+                <span className="text-xs font-medium text-slate-600">League</span>
+                <select
+                  value={leagueId ?? ''}
+                  onChange={(event) => {
+                    setParams(event.target.value ? { league: event.target.value } : {})
+                  }}
+                  className={FILTER_CLASS}
+                >
+                  <option value="">Select a league…</option>
+                  {page.items.map((item) => (
+                    <option key={item.id} value={item.id}>
+                      {item.country ? `${item.name} · ${item.country}` : item.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              {leagueId !== null && leagueTeams.state.kind === 'success' && (
+                <label className="flex flex-col gap-1 text-sm">
+                  <span className="text-xs font-medium text-slate-600">Team</span>
+                  <select
+                    value={teamId ?? ''}
+                    onChange={(event) => {
+                      setParams(filters(wholeNumber(event.target.value), period))
+                    }}
+                    className={FILTER_CLASS}
+                  >
+                    <option value="">All teams</option>
+                    {leagueTeams.state.data?.items.map((team) => (
+                      <option key={team.id} value={team.id}>
+                        {team.name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
+              {leagueId !== null && (
+                <label className="flex flex-col gap-1 text-sm">
+                  <span className="text-xs font-medium text-slate-600">When</span>
+                  <select
+                    value={period}
+                    onChange={(event) => {
+                      setParams(filters(teamId, event.target.value))
+                    }}
+                    className={FILTER_CLASS}
+                  >
+                    {PERIODS.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
+            </div>
           )}
         </Async>
       </Card>
@@ -113,6 +193,25 @@ export function Matches() {
                   title="Choose a league"
                   hint="Its upcoming matches will appear here, ready to predict."
                 />
+              )
+            }
+            if (page.items.length === 0 && pageNumber === 1 && filtered) {
+              return (
+                <div className="space-y-3 text-center">
+                  <Empty
+                    title="No matches fit these filters"
+                    hint="Try another team or period, or clear the filters."
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setParams(filters(null, ''))
+                    }}
+                    className="rounded-md border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                  >
+                    Clear filters
+                  </button>
+                </div>
               )
             }
             if (page.items.length === 0 && pageNumber === 1) {
