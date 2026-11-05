@@ -1,10 +1,11 @@
 import math
+from datetime import timedelta
 
 import numpy as np
 import pytest
 
 from app.ml.dataset import Dataset, Example, FloatArray
-from app.ml.metrics import evaluate
+from app.ml.metrics import evaluate, metrics_by_competition
 from app.ml.probability import (
     MAX_GOALS,
     MatchPrediction,
@@ -71,6 +72,53 @@ def dataset(scores: list[tuple[int, int]]) -> Dataset:
         ),
         "v",
     )
+
+
+class TestMetricsByCompetition:
+    def _data(self, per_competition: dict[int, int]) -> Dataset:
+        examples = []
+        for competition, count in per_competition.items():
+            examples += [
+                Example(
+                    competition * 1000 + i,
+                    START + timedelta(days=i),
+                    1,
+                    competition,
+                    {},
+                    1 if i % 2 else 2,
+                    0,
+                )
+                for i in range(count)
+            ]
+        return Dataset(tuple(sorted(examples, key=lambda e: e.kickoff_at)), "v")
+
+    def test_each_competition_is_measured_on_its_own_matches(self) -> None:
+        data = self._data({1: 40, 2: 30})
+        prediction = MatchPrediction(poisson_grid(1.4, 1.0))
+
+        measured = metrics_by_competition([prediction] * len(data), data)
+
+        assert set(measured) == {"1", "2"}
+        assert measured["1"]["matches"] == 40
+        assert measured["2"]["matches"] == 30
+        # All home wins, and the grid favours the home side.
+        assert measured["1"]["accuracy"] == pytest.approx(1.0)
+        assert measured["1"]["home_win_rate"] == pytest.approx(1.0)
+        assert 0 <= measured["1"]["exact_score_accuracy"] <= 1
+        assert measured["1"]["log_loss"] > 0
+        assert measured["1"]["start"] < measured["1"]["end"]
+
+    def test_too_few_matches_say_nothing_about_a_competition(self) -> None:
+        data = self._data({1: 40, 2: 29})
+        prediction = MatchPrediction(poisson_grid(1.4, 1.0))
+
+        measured = metrics_by_competition([prediction] * len(data), data)
+
+        assert set(measured) == {"1"}
+
+    def test_it_needs_one_prediction_per_match(self) -> None:
+        with pytest.raises(ValueError, match="one prediction per match"):
+            metrics_by_competition([], self._data({1: 40}))
 
 
 class TestMetrics:

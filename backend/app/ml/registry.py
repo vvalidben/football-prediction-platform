@@ -21,13 +21,15 @@ import mlflow
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from app.ml.dataset import load_dataset
 from app.ml.ensemble import EnsembleResult
 from app.ml.experiment import CandidateResult, ExperimentResult
-from app.ml.metrics import SELECTION_METRIC
+from app.ml.metrics import SELECTION_METRIC, metrics_by_competition
 from app.ml.persistence import load_model
 from app.ml.predictors import Predictor
 from app.ml.tracking import Tracker
 from app.models import Competition, ModelVersion
+from app.registry.loading import local_path
 from app.registry.mlflow_sync import MlflowRegistry
 from app.registry.service import ModelRegistry, NewModelVersion
 
@@ -103,12 +105,47 @@ def register_selected(
             "cross_validation": selected.cv_metrics or {},
             "selection_metric": result.selection_metric,
             "test": selected.test_metrics or {},
+            "test_by_competition": selected.test_by_competition,
             "mlflow_run_id": selected.run_id,
         },
         trained_at=result.finished_at,
         artifact_uri=tracker.artifact_uri(selected.run_id),
     )
     return _register(session, new, tracker, selected.run_id, mirror=mirror).id
+
+
+def measure_by_competition(
+    session: Session,
+    row: ModelVersion,
+    start: datetime,
+    end: datetime,
+    *,
+    model_dir: Path | None = None,
+) -> dict[str, dict[str, Any]]:
+    """Record how a registered model does per competition, on matches after its training.
+
+    For models registered before these figures existed. Everything else about the version
+    is left as it was. Refuses any period that overlaps the data the model was fitted on,
+    since accuracy on that says nothing about matches it has not seen.
+    """
+    if row.training_data_end is None or start.date() <= row.training_data_end:
+        raise ValueError(
+            f"{row.name} {row.version} was trained on data up to {row.training_data_end}; "
+            f"the test period must start after that, not on {start.date()}"
+        )
+    if row.feature_set_version is None:
+        raise ValueError(f"{row.name} {row.version} does not state its feature set")
+    directory = model_dir or local_path(row.artifact_uri or "")
+    model = load_model(directory, feature_set_version=row.feature_set_version).model
+    data = load_dataset(session, row.feature_set_version).where(
+        lambda example: start <= example.kickoff_at < end
+    )
+    if len(data) == 0:
+        raise ValueError(f"no finished matches between {start.date()} and {end.date()}")
+    measured = metrics_by_competition(model.predict(data), data)
+    row.training_metrics = {**row.training_metrics, "test_by_competition": measured}
+    session.flush()
+    return measured
 
 
 def register_ensemble(

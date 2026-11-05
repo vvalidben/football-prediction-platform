@@ -161,3 +161,15 @@ load              → EloModel, 3 features, feature set v1-079714a734
   is how you check that.
 - Metrics are stored as JSON rather than in typed columns, so the shape can change
   between sprints.
+
+## Results per competition
+
+A registered version records its test results per competition in `metrics.test_by_competition`, for competitions with at least 30 test matches. The match page shows them, so a prediction can be read against the model's record in that league.
+
+For a version registered before these figures existed:
+
+```bash
+python -m app.ml registry measure poisson VERSION --test-start 2025-08-01 --test-end 2026-06-01 --model-dir models/VERSION
+```
+
+It refuses a period that overlaps the training data, since accuracy on matches a model was fitted on says nothing about matches it has not seen. `--model-dir` is for when the stored artifact path is only valid inside the containers.

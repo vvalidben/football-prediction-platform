@@ -142,6 +142,17 @@ export interface TeamDetail {
   }[]
 }
 
+/** How a model did in one competition, on matches it was not trained on. */
+export interface CompetitionReliability {
+  matches: number
+  accuracy: number
+  log_loss: number
+  exact_score_accuracy: number
+  home_win_rate: number
+  start: string
+  end: string
+}
+
 export interface ModelVersion {
   id: number
   name: string

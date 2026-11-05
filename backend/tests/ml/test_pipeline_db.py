@@ -94,6 +94,86 @@ def test_dataset_is_built_from_snapshots_at_kickoff(league: sessionmaker[Session
     assert "elo_diff" in data.examples[-1].features
 
 
+def test_registered_models_record_their_test_results_per_competition(
+    league: sessionmaker[Session], tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    features_main(["generate"], session_factory=league)
+    uri = f"sqlite:///{(tmp_path / 'mlflow.db').as_posix()}"
+
+    ml_main(
+        ["train", "--tracking-uri", uri, "--experiment", "db-test", "--register"],
+        session_factory=league,
+    )
+
+    with league() as session:
+        row = session.scalars(select(ModelVersion)).one()
+        competition = session.scalars(select(Competition)).one()
+    measured = row.training_metrics["test_by_competition"][str(competition.id)]
+    assert measured["matches"] == row.training_metrics["test"]["matches"]
+    assert measured["accuracy"] == pytest.approx(row.training_metrics["test"]["accuracy"])
+
+
+def test_an_existing_model_can_be_measured_only_on_matches_after_its_training(
+    league: sessionmaker[Session], tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    features_main(["generate"], session_factory=league)
+    uri = f"sqlite:///{(tmp_path / 'mlflow.db').as_posix()}"
+    ml_main(
+        ["train", "--tracking-uri", uri, "--experiment", "db-test", "--register"],
+        session_factory=league,
+    )
+    with league() as session, session.begin():
+        row = session.scalars(select(ModelVersion)).one()
+        name, version, trained_to = row.name, row.version, row.training_data_end
+        before = dict(row.training_metrics)
+        before.pop("test_by_competition")
+        row.training_metrics = before
+    assert trained_to is not None
+
+    too_early = ml_main(
+        [
+            "registry",
+            "--tracking-uri",
+            uri,
+            "measure",
+            name,
+            version,
+            "--test-start",
+            trained_to.isoformat(),
+            "--test-end",
+            "2030-01-01",
+        ],
+        session_factory=league,
+    )
+    with league() as session:
+        untouched = session.scalars(select(ModelVersion)).one()
+    assert too_early == 2
+    assert "test_by_competition" not in untouched.training_metrics
+
+    after = (trained_to + timedelta(days=1)).isoformat()
+    code = ml_main(
+        [
+            "registry",
+            "--tracking-uri",
+            uri,
+            "measure",
+            name,
+            version,
+            "--test-start",
+            after,
+            "--test-end",
+            "2030-01-01",
+        ],
+        session_factory=league,
+    )
+
+    with league() as session:
+        measured = session.scalars(select(ModelVersion)).one().training_metrics
+    assert code == 0
+    assert measured["test_by_competition"]
+    assert measured["validation"] == before["validation"]
+
+
 def test_train_command_tracks_and_registers(
     league: sessionmaker[Session], tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:

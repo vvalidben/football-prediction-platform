@@ -20,7 +20,7 @@ from typing import Any
 
 from app.ml.dataset import Dataset, Example
 from app.ml.feature_sets import CORE_FEATURES, WITH_ODDS
-from app.ml.metrics import SELECTION_METRIC, evaluate, match_log_losses
+from app.ml.metrics import SELECTION_METRIC, evaluate, match_log_losses, metrics_by_competition
 from app.ml.predictors import (
     EloModel,
     HistoricalBaseline,
@@ -113,6 +113,8 @@ class CandidateResult:
     cv_folds: int = 1
     model_type: str = ""
     test_metrics: dict[str, float] | None = None
+    #: The test figures per competition (`metrics.metrics_by_competition`).
+    test_by_competition: dict[str, dict[str, Any]] = field(default_factory=dict)
     #: Per-match 1X2 log loss on the test period, for paired comparisons.
     test_losses: list[float] = field(default_factory=list)
     final_model: Predictor | None = None
@@ -297,6 +299,7 @@ def evaluate_on_test(
         if len(split.test):
             predictions = model.predict(split.test)
             result.test_metrics = evaluate(predictions, split.test)
+            result.test_by_competition = metrics_by_competition(predictions, split.test)
             result.test_losses = match_log_losses(predictions, split.test).tolist()
         else:
             result.test_metrics = {}

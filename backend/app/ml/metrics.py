@@ -14,6 +14,7 @@ of the home, draw and away ECE (`calibration.classwise_ece`).
 
 import math
 from collections.abc import Sequence
+from typing import Any
 
 import numpy as np
 
@@ -23,9 +24,45 @@ from app.ml.probability import MatchPrediction
 
 #: Over/under lines scored by `evaluate` (0.5 is omitted: 0-0 is its only "under").
 EVALUATED_LINES = (1.5, 2.5, 3.5)
+#: Fewest matches a competition needs before its own figures are reported.
+MIN_COMPETITION_MATCHES = 30
 
 #: Probability floor used for log scores, so one impossible outcome cannot give -inf.
 EPS = 1e-15
+
+
+def metrics_by_competition(
+    predictions: Sequence[MatchPrediction], data: Dataset
+) -> dict[str, dict[str, Any]]:
+    """The figures that show how far to trust a model in each competition, keyed by its id.
+
+    Competitions with fewer than `MIN_COMPETITION_MATCHES` matches are left out: a rate
+    from so few says little, and showing it would suggest otherwise.
+    """
+    if len(predictions) != len(data):
+        raise ValueError("one prediction per match is required")
+    measured: dict[str, dict[str, Any]] = {}
+    for competition_id in data.competition_ids:
+        chosen = [
+            index
+            for index, example in enumerate(data.examples)
+            if example.competition_id == competition_id
+        ]
+        if len(chosen) < MIN_COMPETITION_MATCHES:
+            continue
+        subset = Dataset(tuple(data.examples[i] for i in chosen), data.feature_set_version)
+        metrics = evaluate([predictions[i] for i in chosen], subset)
+        described = subset.describe()
+        measured[str(competition_id)] = {
+            "matches": len(chosen),
+            "accuracy": metrics["accuracy"],
+            "log_loss": metrics["log_loss"],
+            "exact_score_accuracy": metrics["exact_score_accuracy"],
+            "home_win_rate": described["home_win_rate"],
+            "start": described["start"],
+            "end": described["end"],
+        }
+    return measured
 
 
 def evaluate(predictions: Sequence[MatchPrediction], data: Dataset) -> dict[str, float]:

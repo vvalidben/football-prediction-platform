@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { getExplanation, getMatch, getTeam, predictMatch } from '../api/endpoints.ts'
-import type { Prediction, TeamDetail } from '../api/types.ts'
+import { getExplanation, getMatch, getModels, getTeam, predictMatch } from '../api/endpoints.ts'
+import type { CompetitionReliability, ModelVersion, Prediction, TeamDetail } from '../api/types.ts'
 import { Async } from '../components/Async.tsx'
 import { ExplanationCard } from '../components/Explanation.tsx'
 import { BarChart, ColumnChart } from '../components/charts/Charts.tsx'
@@ -25,6 +25,54 @@ function totalGoals(matrix: number[][]): { label: string; value: number }[] {
     .filter(([goals]) => goals <= 6)
     .sort((a, b) => a[0] - b[0])
     .map(([goals, probability]) => ({ label: String(goals), value: probability }))
+}
+
+/** The figures recorded for a competition, for models that have any. */
+function reliabilityIn(
+  model: ModelVersion | undefined,
+  competitionId: number,
+): CompetitionReliability | undefined {
+  const measured = model?.metrics.test_by_competition as
+    Record<string, CompetitionReliability> | undefined
+  return measured?.[String(competitionId)]
+}
+
+const monthYear = (value: string) =>
+  new Date(value).toLocaleDateString(undefined, { month: 'short', year: 'numeric' })
+
+/** What the model's record in this league says about how far to trust it. */
+function ReliabilityCard({
+  competition,
+  figures,
+}: {
+  competition: string
+  figures: CompetitionReliability
+}) {
+  return (
+    <Card title={`How reliable is this model in ${competition}?`}>
+      <StatGrid>
+        <Stat
+          label="Right result"
+          value={percent(figures.accuracy)}
+          note={`Always picking the home team: ${percent(figures.home_win_rate)}`}
+        />
+        <Stat
+          label="Exact score"
+          value={percent(figures.exact_score_accuracy)}
+          note="Its most likely score was exactly right"
+        />
+        <Stat
+          label="Tested on"
+          value={`${String(figures.matches)} matches`}
+          note={`${monthYear(figures.start)} – ${monthYear(figures.end)}`}
+        />
+      </StatGrid>
+      <p className="mt-3 text-xs text-slate-500">
+        Measured on matches this model had not been trained on. This is its record across the
+        league, not the chance that this prediction is right.
+      </p>
+    </Card>
+  )
 }
 
 function ScoreGrid({ prediction }: { prediction: Prediction }) {
@@ -146,6 +194,10 @@ export function MatchPrediction() {
   const match = useApi(
     useCallback((signal: AbortSignal) => getMatch(matchId, signal), [matchId]),
     [matchId],
+  )
+  const models = useApi(
+    useCallback((signal: AbortSignal) => getModels({}, signal), []),
+    [],
   )
   const prediction = useApi(
     useCallback(
@@ -278,6 +330,18 @@ export function MatchPrediction() {
                 />
               </StatGrid>
             </Card>
+
+            {(() => {
+              if (match.state.kind !== 'success' || models.state.kind !== 'success') return null
+              const competition = match.state.data.competition
+              const figures = reliabilityIn(
+                models.state.data.find((model) => model.id === forecast.model.id),
+                competition.id,
+              )
+              return figures ? (
+                <ReliabilityCard competition={competition.name} figures={figures} />
+              ) : null
+            })()}
 
             <div className="grid gap-6 lg:grid-cols-2">
               <Card title="Match result">

@@ -29,6 +29,57 @@ function renderPage(overrides: Record<string, unknown> = {}) {
   return fetchMock
 }
 
+const measuredModel = {
+  ...fixtures.modelVersion,
+  metrics: {
+    test_by_competition: {
+      '7': {
+        matches: 380,
+        accuracy: 0.476,
+        log_loss: 1.04,
+        exact_score_accuracy: 0.129,
+        home_win_rate: 0.426,
+        start: '2025-08-15T19:00:00+00:00',
+        end: '2026-05-24T15:00:00+00:00',
+      },
+    },
+  },
+}
+
+describe('reliability of the model in this league', () => {
+  it('shows how the model did on matches it was not trained on', async () => {
+    renderPage({ '/models': [measuredModel] })
+
+    const card = (
+      await screen.findByRole('heading', { name: /How reliable is this model in Premier League/ })
+    ).closest('section')
+    expect(card).not.toBeNull()
+    const scope = within(card as HTMLElement)
+    expect(scope.getByText('47.6%')).toBeInTheDocument()
+    expect(scope.getByText('12.9%')).toBeInTheDocument()
+    expect(scope.getByText('380 matches')).toBeInTheDocument()
+    expect(scope.getByText(/Always picking the home team: 42.6%/)).toBeInTheDocument()
+    expect(scope.getByText(/not been trained on/)).toBeInTheDocument()
+  })
+
+  it('stays out of the way when the league was not measured', async () => {
+    renderPage({ '/models': [fixtures.modelVersion] })
+
+    await screen.findByText('Most probable score')
+
+    expect(screen.queryByText(/How reliable is this model/)).not.toBeInTheDocument()
+  })
+
+  it('does not disturb the prediction when the models cannot be read', async () => {
+    renderPage({
+      '/models': new Response(JSON.stringify({ detail: 'down' }), { status: 503 }),
+    })
+
+    expect(await screen.findByText('Most probable score')).toBeInTheDocument()
+    expect(screen.queryByText(/How reliable is this model/)).not.toBeInTheDocument()
+  })
+})
+
 describe('MatchPrediction', () => {
   it('links back to the upcoming matches of its league', async () => {
     renderPage()

@@ -36,7 +36,12 @@ from app.ml.calibration import CALIBRATION_METHODS
 from app.ml.dataset import Dataset, load_dataset
 from app.ml.ensemble import DEFAULT_MEMBERS, EnsembleResult, run_ensembles
 from app.ml.experiment import ExperimentResult, default_candidates, run_experiment
-from app.ml.registry import load_model_version, register_ensemble, register_selected
+from app.ml.registry import (
+    load_model_version,
+    measure_by_competition,
+    register_ensemble,
+    register_selected,
+)
 from app.ml.report import comparisons, forward_comparisons, render_report
 from app.ml.splits import ChronologicalSplit, SplitError, split_by_dates, split_by_seasons
 from app.ml.tracking import Tracker
@@ -154,6 +159,14 @@ def _parser() -> argparse.ArgumentParser:
     rollback.add_argument("name")
     rollback.add_argument("--to", dest="to_version")
     rollback.add_argument("--reason")
+    measure = actions.add_parser(
+        "measure", help="record a version's results per competition, on matches after training"
+    )
+    measure.add_argument("name")
+    measure.add_argument("version")
+    measure.add_argument("--test-start", type=_date, required=True, help="YYYY-MM-DD")
+    measure.add_argument("--test-end", type=_date, required=True, help="YYYY-MM-DD (exclusive)")
+    measure.add_argument("--model-dir", type=Path, help="the artifact, if not at its stored path")
     load = actions.add_parser("load", help="load a version's artifact to check it is usable")
     load.add_argument("name")
     load.add_argument("--version")
@@ -192,6 +205,25 @@ def _registry(args: argparse.Namespace, session_factory: sessionmaker[Session]) 
                     print(
                         f"{record.version:<26}{record.activated_at} .. {until}{kind}"
                         f"  previous: {record.previous_version}  {record.reason or ''}"
+                    )
+                return 0
+            if args.action == "measure":
+                try:
+                    measured = measure_by_competition(
+                        session,
+                        registry.get(args.name, args.version),
+                        args.test_start,
+                        args.test_end,
+                        model_dir=args.model_dir,
+                    )
+                except ValueError as exc:
+                    print(f"error: {exc}", file=sys.stderr)
+                    return 2
+                for competition_id, figures in measured.items():
+                    print(
+                        f"competition {competition_id:<6}{figures['matches']:>6} matches  "
+                        f"right result {figures['accuracy']:.1%}  "
+                        f"exact score {figures['exact_score_accuracy']:.1%}"
                     )
                 return 0
             if args.action == "load":
