@@ -5,15 +5,15 @@ One request becomes:
 1. **Resolve the match** from `match_id`, or from team names with an optional
    competition and date.
 2. **Compute features** as of a cutoff: now for a match that has not kicked off,
-   the kickoff for one that has. The cutoff is floored to the minute, so repeated
-   requests in the same minute reuse the same feature snapshot, and the snapshot is
-   saved (identical values are recognised, not duplicated).
+   the kickoff for one that has. The cutoff is floored to the minute. A new snapshot
+   is saved only when the values differ from the match's latest one, so nothing is
+   stored until a new result actually changes what is known.
 3. **Load the active model version** of the requested (or only) model name, from
    its artifact, cached per version.
 4. **Predict**, deriving every market from the one score grid (docs/prediction-engine.md).
 5. **Store** the prediction, its full score grid and its over/under lines, and
-   return it. A prediction from the same model version and the same feature
-   snapshot is reused instead of recomputed unless `refresh` is set.
+   return it. The model version's latest prediction for the match is reused if it
+   was made from identical features, unless `refresh` is set.
 
 Features are always computed from information available at the cutoff: the same
 leak-free path used for training (Sprint 4).
@@ -237,7 +237,16 @@ class PredictionService:
         missing = [t for t in targets if t.match_id not in stored]
         if missing:
             rows = self._build(missing)
-            FeatureStore(self.session_factory).save(rows)
+            unchanged = {
+                row.target.match_id: latest
+                for row in rows
+                if (latest := self._latest_snapshot(session, row.target)) is not None
+                and latest.features == row.values
+            }
+            FeatureStore(self.session_factory).save(
+                [row for row in rows if row.target.match_id not in unchanged]
+            )
+            stored.update(unchanged)
             session.expire_all()
             for snapshot in session.scalars(
                 select(FeatureSnapshot).where(
@@ -255,6 +264,20 @@ class PredictionService:
                 status_code=422,
             )
         return stored
+
+    def _latest_snapshot(self, session: Session, target: Target) -> FeatureSnapshot | None:
+        """The match's newest snapshot taken by this cutoff. Later cutoffs are excluded: the
+        feature job stores one at kickoff for matches still to be played."""
+        return session.scalars(
+            select(FeatureSnapshot)
+            .where(
+                FeatureSnapshot.match_id == target.match_id,
+                FeatureSnapshot.feature_set_version == self.config.version(),
+                FeatureSnapshot.data_cutoff_at <= target.cutoff,
+            )
+            .order_by(FeatureSnapshot.data_cutoff_at.desc())
+            .limit(1)
+        ).one_or_none()
 
     def _build(self, targets: list[Target]) -> list[FeatureRow]:
         try:
@@ -401,17 +424,23 @@ class PredictionService:
         model_version: ModelVersion,
         snapshot: FeatureSnapshot,
     ) -> Prediction | None:
-        """A prediction already made from these features by this model version."""
-        return session.scalars(
+        """This model version's latest prediction, if it was made from these features."""
+        latest = session.scalars(
             select(Prediction)
             .where(
                 Prediction.match_id == match.id,
                 Prediction.model_version_id == model_version.id,
-                Prediction.feature_snapshot_id == snapshot.id,
             )
-            .order_by(Prediction.predicted_at.desc())
+            .order_by(Prediction.predicted_at.desc(), Prediction.id.desc())
             .limit(1)
         ).one_or_none()
+        if latest is None or latest.feature_snapshot is None:
+            return None
+        same_features = (
+            latest.feature_snapshot_id == snapshot.id
+            or latest.feature_snapshot.features == snapshot.features
+        )
+        return latest if same_features else None
 
     # Reading ------------------------------------------------------------------------
 
@@ -517,10 +546,14 @@ def list_stored(
     *,
     match_id: int | None = None,
     model_name: str | None = None,
+    latest_per_match: bool = False,
     limit: int = 20,
     offset: int = 0,
 ) -> tuple[int, list[StoredPredictionRead]]:
-    """Stored predictions, newest first, with their result when there is one."""
+    """Stored predictions, newest first, with their result when there is one.
+
+    `latest_per_match` keeps only each match's newest prediction within the filters.
+    """
     query = (
         select(Prediction, Match, ModelVersion, PredictionResult)
         .join(Match, Match.id == Prediction.match_id)
@@ -537,6 +570,15 @@ def list_stored(
         query = query.where(Prediction.match_id == match_id)
     if model_name:
         query = query.where(ModelVersion.name == model_name)
+    if latest_per_match:
+        newest = (
+            select(func.max(Prediction.id))
+            .join(ModelVersion, ModelVersion.id == Prediction.model_version_id)
+            .group_by(Prediction.match_id)
+        )
+        if model_name:
+            newest = newest.where(ModelVersion.name == model_name)
+        query = query.where(Prediction.id.in_(newest))
     total = session.scalar(select(func.count()).select_from(query.subquery())) or 0
     rows = session.execute(
         query.order_by(Prediction.predicted_at.desc(), Prediction.id.desc())

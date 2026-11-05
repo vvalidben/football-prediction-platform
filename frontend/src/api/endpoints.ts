@@ -51,7 +51,7 @@ export const getCompetitions = (signal?: AbortSignal) =>
   )
 
 export const getStoredPredictions = (
-  params: { match_id?: number; model_name?: string; limit?: number },
+  params: { match_id?: number; model_name?: string; latest_per_match?: boolean; limit?: number },
   signal?: AbortSignal,
 ) => apiGet<Page<StoredPrediction>>('/predictions', params, signal)
 

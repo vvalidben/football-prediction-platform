@@ -49,7 +49,10 @@ export function Dashboard() {
     [],
   )
   const predictions = useApi(
-    useCallback((signal: AbortSignal) => getStoredPredictions({ limit: 8 }, signal), []),
+    useCallback(
+      (signal: AbortSignal) => getStoredPredictions({ latest_per_match: true, limit: 8 }, signal),
+      [],
+    ),
     [],
   )
   const models = useApi(

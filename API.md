@@ -27,7 +27,7 @@ The REST interface over the data and models. Code: `backend/app/api/routes/`,
 | GET | `/matches/{match_id}` | One match with teams, result so far and stored predictions |
 | POST | `/predictions/match` | Predict one match |
 | POST | `/predictions/batch` | Predict up to 50 matches in one call |
-| GET | `/predictions` | Stored predictions with their outcome; filter by `match_id`, `model_name` |
+| GET | `/predictions` | Stored predictions with their outcome; filter by `match_id`, `model_name`; `latest_per_match=true` keeps each match's newest |
 | GET | `/predictions/history` | History with results, errors and a summary; filter by competition, season, team, model, date and whether it has been scored |
 | GET | `/predictions/{prediction_id}` | A stored prediction, unchanged |
 | GET | `/predictions/{prediction_id}/explanation` | Which features moved that prediction, per outcome |

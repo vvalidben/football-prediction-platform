@@ -5,12 +5,47 @@ from typing import Any
 
 import pytest
 from fastapi.testclient import TestClient
+from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session, sessionmaker
 
-from app.models import ModelVersion
+from app.models import FeatureSnapshot, Match, ModelVersion, Prediction
+from app.models.enums import MatchStatus
 from app.registry.service import ModelRegistry
 
 pytestmark = pytest.mark.integration
+
+
+def _prediction_and_snapshot_counts(
+    session_factory: sessionmaker[Session], match_id: int
+) -> tuple[int, int]:
+    with session_factory() as session:
+        predictions = session.scalar(
+            select(func.count()).select_from(Prediction).where(Prediction.match_id == match_id)
+        )
+        snapshots = session.scalar(
+            select(func.count())
+            .select_from(FeatureSnapshot)
+            .where(FeatureSnapshot.match_id == match_id)
+        )
+    return predictions or 0, snapshots or 0
+
+
+def _predict_later(
+    client: TestClient,
+    session_factory: sessionmaker[Session],
+    match_id: int,
+    model_version: ModelVersion,
+) -> Any:
+    """The same match predicted an hour from now, so a new cutoff is due."""
+    service = client.app.state.predictions  # type: ignore[attr-defined]
+    with session_factory() as session, session.begin():
+        match = session.get(Match, match_id)
+        version = session.get(ModelVersion, model_version.id)
+        assert match is not None and version is not None
+        (outcome,) = service.predict(
+            session, [match], version, now=datetime.now(UTC) + timedelta(hours=1)
+        )
+    return outcome
 
 
 def assert_consistent(body: dict[str, Any]) -> None:
@@ -138,6 +173,50 @@ class TestPredictMatch:
         assert second["id"] == first["id"]
         assert second["reused"] is True and first["reused"] is False
         assert second["home_win_probability"] == first["home_win_probability"]
+
+    def test_a_later_request_with_nothing_new_reuses_the_prediction(
+        self,
+        client: TestClient,
+        league: dict[str, int],
+        active_model: ModelVersion,
+        session_factory: sessionmaker[Session],
+    ) -> None:
+        """Opening a match page again must not save another copy of the same forecast."""
+        first = client.post("/predictions/match", json={"match_id": league["next_match"]}).json()
+        counts = _prediction_and_snapshot_counts(session_factory, league["next_match"])
+
+        outcome = _predict_later(client, session_factory, league["next_match"], active_model)
+
+        assert outcome.created is False
+        assert _prediction_and_snapshot_counts(session_factory, league["next_match"]) == counts
+        assert first["reused"] is False
+
+    def test_a_new_result_makes_a_new_prediction(
+        self,
+        client: TestClient,
+        league: dict[str, int],
+        active_model: ModelVersion,
+        session_factory: sessionmaker[Session],
+    ) -> None:
+        client.post("/predictions/match", json={"match_id": league["next_match"]})
+        with session_factory() as session, session.begin():
+            upcoming = session.get(Match, league["next_match"])
+            assert upcoming is not None
+            team = upcoming.home_team_id
+            played = session.scalars(
+                select(Match)
+                .where(
+                    Match.status == MatchStatus.FINISHED,
+                    or_(Match.home_team_id == team, Match.away_team_id == team),
+                )
+                .order_by(Match.kickoff_at.desc())
+                .limit(1)
+            ).one()
+            played.home_score = (played.home_score or 0) + 5
+
+        outcome = _predict_later(client, session_factory, league["next_match"], active_model)
+
+        assert outcome.created is True
 
     def test_refresh_makes_a_new_prediction(
         self, client: TestClient, league: dict[str, int], active_model: ModelVersion
@@ -465,3 +544,27 @@ class TestBatchOrdering:
                 alone["home_win_probability"], abs=1e-9
             )
             assert item["prediction"]["home_team"] == alone["home_team"]
+
+
+class TestLatestPerMatch:
+    def test_the_list_can_show_each_match_once(
+        self, client: TestClient, league: dict[str, int], active_model: ModelVersion
+    ) -> None:
+        for refresh in (False, True):
+            client.post(
+                "/predictions/match", json={"match_id": league["next_match"], "refresh": refresh}
+            )
+        newest = client.post(
+            "/predictions/match", json={"match_id": league["next_match"], "refresh": True}
+        ).json()
+        client.post("/predictions/match", json={"match_id": league["later_match"]})
+
+        everything = client.get("/predictions").json()
+        once = client.get("/predictions", params={"latest_per_match": True}).json()
+
+        assert everything["total"] == 4
+        assert once["total"] == 2
+        assert sorted(item["match_id"] for item in once["items"]) == sorted(
+            [league["next_match"], league["later_match"]]
+        )
+        assert newest["id"] in {item["id"] for item in once["items"]}

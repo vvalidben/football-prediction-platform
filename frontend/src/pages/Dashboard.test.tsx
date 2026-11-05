@@ -2,7 +2,7 @@ import { screen, waitFor } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { dateOnly } from '../format.ts'
 import * as fixtures from '../test/fixtures.ts'
-import { mockApi, page, renderAt } from '../test/render.tsx'
+import { mockApi, page, renderAt, urlOf } from '../test/render.tsx'
 import { Dashboard } from './Dashboard.tsx'
 
 const routes = {
@@ -14,6 +14,17 @@ const routes = {
 }
 
 describe('Dashboard', () => {
+  it('asks for one prediction per match, so a match is not listed repeatedly', async () => {
+    const fetchMock = mockApi(routes)
+    renderAt(<Dashboard />)
+    await screen.findByRole('heading', { name: 'Latest predictions' })
+
+    await waitFor(() => {
+      const urls = fetchMock.mock.calls.map(([input]) => urlOf(input))
+      expect(urls.some((url) => url.includes('latest_per_match=true'))).toBe(true)
+    })
+  })
+
   it('shows a loading state before anything has arrived', () => {
     mockApi(routes)
     renderAt(<Dashboard />)

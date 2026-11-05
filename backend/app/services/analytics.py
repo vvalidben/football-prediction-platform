@@ -192,15 +192,40 @@ def team_trend(rows: Sequence[TeamMatchRow]) -> list[dict[str, Any]]:
     return trend
 
 
+def _one_per_match[R: Sequence[Any]](rows: Sequence[R]) -> list[R]:
+    """The prediction that speaks for each match, from (prediction, result, match) rows.
+
+    The last one made before kickoff is what the model would have said going in. A match
+    only predicted afterwards falls back to its earliest prediction. Without this, the
+    matches people opened most would weigh most in the measured accuracy.
+    """
+    by_match: dict[int, list[R]] = {}
+    for row in rows:
+        by_match.setdefault(row[2].id, []).append(row)
+    chosen = []
+    for predictions in by_match.values():
+        kickoff = predictions[0][2].kickoff_at
+        before = [row for row in predictions if row[0].predicted_at < kickoff]
+        chosen.append(
+            max(before, key=lambda row: row[0].predicted_at)
+            if before
+            else min(predictions, key=lambda row: row[0].predicted_at)
+        )
+    return chosen
+
+
 def model_performance(session: Session, model_version_id: int) -> dict[str, Any]:
-    """Accuracy, scores, calibration and a monthly series from evaluated predictions."""
-    rows = session.execute(
-        select(Prediction, PredictionResult, Match)
-        .join(PredictionResult, PredictionResult.prediction_id == Prediction.id)
-        .join(Match, Match.id == Prediction.match_id)
-        .where(Prediction.model_version_id == model_version_id)
-        .order_by(Match.kickoff_at)
-    ).all()
+    """Accuracy, scores, calibration and a monthly series from evaluated predictions,
+    with each match counted once."""
+    rows = _one_per_match(
+        session.execute(
+            select(Prediction, PredictionResult, Match)
+            .join(PredictionResult, PredictionResult.prediction_id == Prediction.id)
+            .join(Match, Match.id == Prediction.match_id)
+            .where(Prediction.model_version_id == model_version_id)
+            .order_by(Match.kickoff_at, Prediction.predicted_at)
+        ).all()
+    )
     if not rows:
         return {
             "evaluated": 0,

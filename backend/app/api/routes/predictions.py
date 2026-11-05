@@ -216,12 +216,20 @@ def list_predictions(
     session: DbSessionDep,
     match_id: Annotated[int | None, Query(ge=1)] = None,
     model_name: Annotated[str | None, Query(max_length=120)] = None,
+    latest_per_match: Annotated[
+        bool, Query(description="Keep only each match's newest prediction")
+    ] = False,
     limit: Annotated[int, Query(ge=1, le=100)] = 20,
     offset: Annotated[int, Query(ge=0)] = 0,
 ) -> StoredPredictionPage:
     """Stored predictions, newest first, with the result once the match is played."""
     total, items = list_stored(
-        session, match_id=match_id, model_name=model_name, limit=limit, offset=offset
+        session,
+        match_id=match_id,
+        model_name=model_name,
+        latest_per_match=latest_per_match,
+        limit=limit,
+        offset=offset,
     )
     return StoredPredictionPage(total=total, limit=limit, offset=offset, items=items)
 

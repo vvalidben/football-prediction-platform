@@ -1,6 +1,8 @@
 """The endpoints the frontend pages need: matches, teams, predictions, performance, status."""
 
 from datetime import UTC, datetime, timedelta
+from types import SimpleNamespace
+from typing import Any
 
 import pytest
 from fastapi.testclient import TestClient
@@ -9,8 +11,38 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from app.models import DataSource, Match, ModelVersion, TeamMatchStatistics
 from app.models.enums import MatchStatus
+from app.services.analytics import _one_per_match
 
 pytestmark = pytest.mark.integration
+
+
+class TestOnePredictionPerMatch:
+    """Which prediction speaks for a match: the last one made before it kicked off."""
+
+    KICKOFF = datetime(2026, 3, 1, 15, 0, tzinfo=UTC)
+
+    def _row(self, match_id: int, predicted_at: datetime) -> tuple[Any, Any, Any]:
+        prediction = SimpleNamespace(predicted_at=predicted_at)
+        return prediction, SimpleNamespace(), SimpleNamespace(id=match_id, kickoff_at=self.KICKOFF)
+
+    def test_the_last_one_before_kickoff_is_used(self) -> None:
+        early = self._row(1, self.KICKOFF - timedelta(days=2))
+        late = self._row(1, self.KICKOFF - timedelta(hours=1))
+        after = self._row(1, self.KICKOFF + timedelta(hours=9))
+
+        assert _one_per_match([early, late, after]) == [late]
+
+    def test_without_one_before_kickoff_the_earliest_is_used(self) -> None:
+        first = self._row(1, self.KICKOFF + timedelta(hours=1))
+        second = self._row(1, self.KICKOFF + timedelta(hours=2))
+
+        assert _one_per_match([first, second]) == [first]
+
+    def test_matches_stay_in_their_order(self) -> None:
+        one = self._row(1, self.KICKOFF - timedelta(days=1))
+        two = self._row(2, self.KICKOFF - timedelta(days=1))
+
+        assert _one_per_match([one, two]) == [one, two]
 
 
 class TestMatchList:
@@ -163,6 +195,35 @@ class TestModelPerformance:
         assert body["evaluated"] == 0
         assert body["accuracy"] is None
         assert body["calibration"] == [] and body["monthly"] == []
+
+    def test_a_match_counts_once_however_often_it_was_predicted(
+        self,
+        client: TestClient,
+        league: dict[str, int],
+        active_model: ModelVersion,
+        session_factory: sessionmaker[Session],
+    ) -> None:
+        """Otherwise the matches people opened most would weigh most in the accuracy."""
+        for refresh in (False, True, True):
+            client.post(
+                "/predictions/match", json={"match_id": league["next_match"], "refresh": refresh}
+            )
+        with session_factory() as session, session.begin():
+            upcoming = session.get(Match, league["next_match"])
+            assert upcoming is not None
+            upcoming.status = MatchStatus.FINISHED
+            upcoming.home_score, upcoming.away_score = 3, 0
+            upcoming.kickoff_at = datetime.now(UTC) - timedelta(days=2)
+        from app.services.evaluation import evaluate_pending
+
+        with session_factory() as session, session.begin():
+            evaluate_pending(session)
+
+        body = client.get(f"/models/{active_model.id}/performance").json()
+
+        assert body["evaluated"] == 1
+        assert sum(bucket["count"] for bucket in body["calibration"]) == 3
+        assert sum(entry["matches"] for entry in body["monthly"]) == 1
 
     def test_reports_accuracy_calibration_and_a_monthly_series(
         self,
