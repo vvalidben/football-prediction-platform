@@ -5,7 +5,7 @@ machine-learning models: exact scores, home/draw/away probabilities, expected go
 over/under, both-teams-to-score, score distributions and historical evaluation across
 multiple competitions.
 
-**Current state: Sprint 19 — final audit.** The stack runs end to end (React →
+**Current state: complete.** The stack runs end to end (React →
 FastAPI → PostgreSQL/Redis), the full database schema is in place
 ([docs/database.md](docs/database.md)), and a provider-independent ingestion layer
 syncs data idempotently, with API-Football as the first adapter
